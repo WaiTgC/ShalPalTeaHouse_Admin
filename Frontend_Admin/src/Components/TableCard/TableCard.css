@@ -1,0 +1,197 @@
+.tablecard {
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 268px;
+  height: 221px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+.tablecard img {
+  margin-top: 20px;
+}
+span.tablecard-name {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid black;
+  padding: 5px 10px;
+  border-radius: 0 0 0 10px;
+}
+
+.tablecard-details {
+  display: flex;
+  justify-content: space-around; /* Space between Name and Price */
+  width: 100%; /* Full width of the card */
+  padding: 0 5px; /* Small padding on sides */
+}
+.delete-text,
+.edit-text {
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+.alert-overlay-edit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensures it's on top */
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.alert-box-delete {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 300px;
+  width: 630px;
+  border: 1px solid black;
+  position: relative;
+}
+.alert-overlay-delete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensures it's on top */
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.alert-box-edit {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 400px;
+  width: 650px;
+  border: 1px solid black;
+  position: relative;
+}
+i.bi.bi-x-lg {
+  font-size: 35px;
+  font-weight: 600;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.alert-box-delete p {
+  font-size: 16px;
+  margin-top: 60px;
+}
+.alert-buttons {
+  font-size: 45px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  gap: 250px;
+  margin-top: 50px;
+}
+.logotext-edit {
+  display: flex;
+  line-height: 2;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+}
+.logotext-edit h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0px !important;
+  overflow-y: hidden;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.logotext-edit span {
+  font-family: "Poppins", sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  color: black;
+  overflow-y: hidden;
+  margin-bottom: 10px !important;
+}
+.table-number-text {
+  position: relative;
+  right: 20px;
+}
+input.form-control {
+  width: 55%;
+  height: 15%;
+  display: inline;
+  background-color: #e1e1e1;
+  position: relative;
+  left: 36px;
+  margin-top: 20px;
+}
+.alert-box-edit hr {
+  border-top: 20px solid transparent;
+  background-color: transparent;
+  margin: 10px 0;
+}
+.alert-box-edit .get-Qr {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #e1e1e1;
+  text-decoration: underline;
+  border-radius: 5px;
+  padding: 15px 130px;
+  position: relative;
+  left: 60px;
+}
+.alert-box-edit button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #e1e1e1;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+@media screen and (max-width: 768px) {
+  .tablecard {
+    transform: scale(0.8);
+  }
+}
+@media screen and (max-width: 480px) {
+  .tablecard {
+    transform: scale(0.7) translate(-15%, 0%);
+  }
+}
+@media screen and (max-width: 400px) {
+  .tablecard {
+    transform: scale(0.65) translate(-21%, 0%);
+  }
+}

@@ -1,0 +1,35 @@
+.table-card-display {
+  padding: 50px 100px;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+
+.table-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 90px 70px;
+  padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .table-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px 0px;
+    padding: 0px;
+  }
+
+  .table-card-display {
+    padding: 0px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .table-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0px 0px;
+    padding: 0px;
+  }
+
+  .table-card-display {
+    padding: 0px;
+  }
+}

@@ -1,0 +1,9 @@
+.blank_black {
+  background-color: #bfbfbf;
+  border-bottom: 2px solid black;
+  height: 50px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  overflow: hidden;
+}

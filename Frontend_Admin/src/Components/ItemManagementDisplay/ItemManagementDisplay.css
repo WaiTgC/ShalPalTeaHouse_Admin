@@ -1,0 +1,67 @@
+.item-management-container {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.sidebar {
+  width: 100px; /* Adjust width as needed */
+}
+
+.add-item-btn {
+  background: none;
+  border: 1px solid black;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+}
+
+.table-container {
+  flex: 1;
+  overflow-x: auto;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-table th,
+.item-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  vertical-align: middle;
+}
+
+.upload-btn {
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px 10px;
+  margin-right: -100px;
+  cursor: pointer;
+}
+
+.edit-btn,
+.delete-btn {
+  display: inline-flex;
+  justify-content: center;
+
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #d9d9d9;
+}
+
+.delete-btn {
+  background-color: #d9d9d9;
+}
+
+.actions {
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
