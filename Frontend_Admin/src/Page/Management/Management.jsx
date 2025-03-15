@@ -10,6 +10,7 @@ const Management = () => {
     <div>
       <Layout_3>
         <Routes>
+          <Route path="/" element={<ItemManagement />} />
           <Route path="TableManagement" element={<TableManagement />} />
           <Route path="ItemManagement" element={<ItemManagement />} />
           <Route path="CategoryManagement" element={<CategoryManagement />} />

@@ -1,6 +1,6 @@
 import React from "react";
 import Layout_1 from "../../Layout/Layout_1/Layout_1";
-import Card from "../../Components/Card/Card";
+
 import CardDisplay from "../../Components/CardDisplay/CardDisplay";
 
 const CreateOrder = () => {

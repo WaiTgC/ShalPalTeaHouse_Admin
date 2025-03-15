@@ -40,7 +40,7 @@ const ItemManagementCard = ({
   return (
     <tr>
       <td>{index}.</td>
-      <td>
+      <td className="tdname">
         {isEditing ? (
           <input
             type="text"
@@ -53,7 +53,7 @@ const ItemManagementCard = ({
           editedItem.name
         )}
       </td>
-      <td>
+      <td className="tdprice">
         {isEditing ? (
           <input
             type="text"
@@ -66,7 +66,7 @@ const ItemManagementCard = ({
           editedItem.price
         )}
       </td>
-      <td>
+      <td className="tdphoto">
         {editedItem.image ? (
           <img src={editedItem.image} alt="Item" width="50" height="50" />
         ) : (
@@ -92,10 +92,11 @@ const ItemManagementCard = ({
           Delete
         </button>
       </td>
-      <td className="actions">
+      <td className="actions" style={{ border: "none" }}>
         {showAddButton ? (
-          <button className="add-item-btn" onClick={onAdd}>
-            ➕ Add New Item
+          <button className="add-category-btn" onClick={onAdd}>
+            <i className="bi bi-plus-circle" />
+            <span className="text-add">Add New Category</span>
           </button>
         ) : null}
       </td>

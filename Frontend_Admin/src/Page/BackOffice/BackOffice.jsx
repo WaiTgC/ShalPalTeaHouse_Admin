@@ -7,27 +7,21 @@ import TaxConfiguration from "../../Components/Tax Configuration/TaxConfig";
 import PaymentSetting from "../../Components/PaymentSetting/PaymentSetting";
 import SalesReport from "../../Components/SalesReport/SalesReport";
 
-const Management = () => {
+const BackOffice = () => {
   const location = useLocation();
-  console.log("Current location:", location.pathname);
 
   return (
     <Layout_4>
       <Routes>
-        <Route path="/Management/UserRole" element={<UserRole />} />
-        <Route
-          path="/Management/EmployeeManagement"
-          element={<EmployeeManagement />}
-        />
-        <Route
-          path="/Management/TaxConfiguration"
-          element={<TaxConfiguration />}
-        />
-        <Route path="/Management/PaymentSetting" element={<PaymentSetting />} />
-        <Route path="/Management/SalesReport" element={<SalesReport />} />
+        <Route path="/" element={<UserRole />} />
+        <Route path="UserRole" element={<UserRole />} />
+        <Route path="EmployeeManagement" element={<EmployeeManagement />} />
+        <Route path="TaxConfiguration" element={<TaxConfiguration />} />
+        <Route path="PaymentSetting" element={<PaymentSetting />} />
+        <Route path="SalesReport" element={<SalesReport />} />
       </Routes>
     </Layout_4>
   );
 };
 
-export default Management;
+export default BackOffice;

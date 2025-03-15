@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import "./TableCardDisplay.css";
 import TableCard from "../TableCard/TableCard";
+import { tableNo } from "../../assets/assets";
 
 const TableCardDisplay = () => {
-  const [tableitems, setTableitems] = useState([
-    { id: 1, name: "A1" },
-    { id: 2, name: "A2" },
-    { id: 3, name: "A3" },
-    { id: 4, name: "A4" },
-    { id: 5, name: "A5" },
-    { id: 6, name: "A6" },
-    { id: 7, name: "A7" },
-    { id: 8, name: "A8" },
-  ]);
+  const [tableitems, setTableitems] = useState(tableNo);
 
   const handleDelete = (name) => {
     const tableToDelete = tableitems.find((table) => table.name === name);

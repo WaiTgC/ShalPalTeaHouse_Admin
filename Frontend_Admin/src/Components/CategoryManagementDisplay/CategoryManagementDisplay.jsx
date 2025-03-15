@@ -1,96 +1,59 @@
-// CategoryManagement.js
 import React, { useState } from "react";
-import CategoryManagementCard from "../CategoryManagementCard/CategoryManagementCard"; // Updated import
-import "./CategoryManagementDisplay.css"; // Updated CSS import
+import CategoryManagementCard from "../CategoryManagementCard/CategoryManagementCard";
+import "./CategoryManagementDisplay.css";
+import { menuItems } from "../../assets/assets";
 
-const CategoryManagement = () => {
-  const [categories, setCategories] = useState([
-    {
-      _id: "1",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "2",
-      name: "Lahpet Thoke",
-      image: null,
-      price: "30 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "3",
-      name: "Shan Noodles",
-      image: null,
-      price: "40 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "4",
-      name: "Tea Leaf Salad",
-      image: null,
-      price: "35 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "5",
-      name: "Nan Gyi Thoke",
-      image: null,
-      price: "45 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "6",
-      name: "Kyay Oh",
-      image: null,
-      price: "55 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "7",
-      name: "Htamane",
-      image: null,
-      price: "25 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "8",
-      name: "Mont Lin Ma Yar",
-      image: null,
-      price: "20 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "9",
-      name: "Ohn No Khao Swe",
-      image: null,
-      price: "60 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "10",
-      name: "Beef Curry",
-      image: null,
-      price: "70 B",
-      category: "Burmese Specials",
-    },
-  ]);
+const CategoryManagementDisplay = () => {
+  const [categories, setCategories] = useState(menuItems);
+
+  // ➕ Extract unique category names
+  const uniqueCategoryNames = [
+    ...new Set(categories.map((item) => item.category.trim())),
+  ];
+
+  const [showAlertBox, setShowAlertBox] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+
+  const closeAlert = () => {
+    setShowAlertBox(false);
+  };
 
   function handleAddCategory() {
-    const name = prompt("Enter category name:");
-    const price = prompt("Enter category price:"); // Adjust fields as needed
+    setShowAlertBox(true); // Show custom alert box instead of prompt
+  }
 
-    if (name && price) {
+  function handleAlertBoxSubmit() {
+    if (newCategoryName) {
+      const trimmed = newCategoryName.trim().toLowerCase();
+      const alreadyExists = uniqueCategoryNames.some(
+        (cat) => cat.toLowerCase() === trimmed
+      );
+
+      if (alreadyExists) {
+        alert("Category already exists!");
+        return;
+      }
+
       const newCategory = {
         _id: (categories.length + 1).toString(),
-        name,
+        name: "",
         image: null,
-        price,
-        category: "Burmese Specials", // Adjust this if categories shouldn't have a category field
+        price: "",
+        category: newCategoryName.trim(),
       };
+
       setCategories([...categories, newCategory]);
+      setShowAlertBox(false); // Close alert box
+      setNewCategoryName(""); // Reset input
+      alert("Category added successfully!"); // Optional success alert
+    } else {
+      alert("Please enter a category name.");
     }
+  }
+
+  function handleAlertBoxCancel() {
+    setShowAlertBox(false);
+    setNewCategoryName("");
   }
 
   const handleEdit = (id) => {
@@ -98,19 +61,21 @@ const CategoryManagement = () => {
   };
 
   const handleSave = (updatedCategory) => {
-    console.log("Received updated category:", updatedCategory);
+    console.log("Received updated Category:", updatedCategory);
     setCategories(
-      categories.map((category) =>
-        category._id === updatedCategory._id
-          ? { ...category, ...updatedCategory }
-          : category
+      categories.map((cat) =>
+        cat._id === updatedCategory._id ? { ...cat, ...updatedCategory } : cat
       )
     );
+    alert("Category saved successfully!");
   };
 
   const handleDelete = (id) => {
-    console.log("Deleting category with ID:", id);
-    setCategories(categories.filter((category) => category._id !== id));
+    console.log("Deleting item with ID:", id);
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      setCategories(categories.filter((cat) => cat._id !== id));
+      alert("Category deleted successfully!");
+    }
   };
 
   return (
@@ -120,30 +85,55 @@ const CategoryManagement = () => {
           <thead>
             <tr>
               <th>No.</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Photo</th>
-              <th colSpan={3}>Actions</th>
+              <th>Category</th>
+              <th colSpan={3}></th>
             </tr>
           </thead>
           <tbody>
-            {categories.map((category, index) => (
-              <CategoryManagementCard
-                key={category._id}
-                index={index + 1}
-                category={category} // Changed prop name from 'item' to 'category'
-                onDelete={handleDelete}
-                onEdit={handleEdit}
-                onSave={handleSave}
-                showAddButton={index === categories.length - 1}
-                onAdd={handleAddCategory}
-              />
-            ))}
+            {uniqueCategoryNames.map((categoryName, index) => {
+              const firstItem = categories.find(
+                (item) =>
+                  item.category.trim().toLowerCase() ===
+                  categoryName.toLowerCase()
+              );
+
+              return (
+                <CategoryManagementCard
+                  key={firstItem._id}
+                  index={index + 1}
+                  category={firstItem}
+                  onDelete={handleDelete}
+                  onEdit={handleEdit}
+                  onSave={handleSave}
+                  showAddButton={index === uniqueCategoryNames.length - 1}
+                  onAdd={handleAddCategory}
+                />
+              );
+            })}
           </tbody>
         </table>
       </div>
+      {showAlertBox && (
+        <div className="custom-alert-box">
+          <div className="alert-box-content">
+            <i onClick={closeAlert} className="bi bi-x-lg" />
+            <h3>Enter Category Name</h3>
+            <input
+              type="text"
+              value={newCategoryName}
+              onChange={(e) => setNewCategoryName(e.target.value)}
+              placeholder="Enter category name"
+              className="alert-box-input"
+            />
+            <div className="alert-box-buttons">
+              <button onClick={handleAlertBoxSubmit}>Confirm</button>
+              <button onClick={handleAlertBoxCancel}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default CategoryManagement;
+export default CategoryManagementDisplay;

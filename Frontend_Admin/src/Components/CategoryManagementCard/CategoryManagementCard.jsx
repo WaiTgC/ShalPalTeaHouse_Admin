@@ -19,16 +19,8 @@ const CategoryManagementCard = ({
     setEditedCategory({ ...editedCategory, [e.target.name]: e.target.value }); // Updated variable name
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setEditedCategory({ ...editedCategory, image: imageUrl }); // Updated variable name
-    }
-  };
-
   const handleSave = () => {
-    if (!editedCategory.name || !editedCategory.price) {
+    if (!editedCategory.category) {
       // Updated variable name
       alert("Please fill in all fields before saving.");
       return;
@@ -40,48 +32,21 @@ const CategoryManagementCard = ({
 
   return (
     <tr>
-      <td>{index}.</td>
+      <td style={{ width: 110 }}>{index}.</td>
       <td>
         {isEditing ? (
           <input
             type="text"
-            name="name"
-            value={editedCategory.name} // Updated variable name
+            name="category"
+            value={editedCategory.category} // Updated variable name
             onChange={handleChange}
             placeholder="Enter Category Name" // Updated placeholder
           />
         ) : (
-          editedCategory.name // Updated variable name
+          editedCategory.category // Updated variable name
         )}
       </td>
-      <td>
-        {isEditing ? (
-          <input
-            type="text"
-            name="price"
-            value={editedCategory.price} // Updated variable name
-            onChange={handleChange}
-            placeholder="Enter Price" // Kept as is, adjust if not needed for categories
-          />
-        ) : (
-          editedCategory.price // Updated variable name
-        )}
-      </td>
-      <td>
-        {editedCategory.image ? ( // Updated variable name
-          <img
-            src={editedCategory.image}
-            alt="Category"
-            width="50"
-            height="50"
-          /> // Updated alt text
-        ) : (
-          <label className="upload-btn">
-            <input type="file" onChange={handleFileChange} hidden />
-            Upload photo
-          </label>
-        )}
-      </td>
+
       <td className="actions">
         {isEditing ? (
           <button className="save-btn" onClick={handleSave}>
@@ -96,14 +61,14 @@ const CategoryManagementCard = ({
       <td className="actions">
         <button className="delete-btn" onClick={() => onDelete(category._id)}>
           {" "}
-          // Updated prop name Delete
+          Delete
         </button>
       </td>
-      <td className="actions">
+      <td className="actions" style={{ border: "none" }}>
         {showAddButton ? (
           <button className="add-category-btn" onClick={onAdd}>
-            {" "}
-            // Updated class name ➕ Add New Category // Updated button text
+            <i className="bi bi-plus-circle" />
+            <span className="text-add">Add New Category</span>
           </button>
         ) : null}
       </td>

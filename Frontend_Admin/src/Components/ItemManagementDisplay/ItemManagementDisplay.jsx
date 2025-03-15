@@ -1,113 +1,86 @@
 import React, { useState } from "react";
 import ItemManagementCard from "../ItemManagementCard/ItemManagementCard";
 import "./ItemManagementDisplay.css";
+import { menuItems } from "../../assets/assets";
 
 const ItemManagementDisplay = () => {
-  const [items, setItems] = useState([
-    {
-      _id: "1",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "2",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "3",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "4",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "5",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "6",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "7",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "8",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "9",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-    {
-      _id: "10",
-      name: "Mohinga",
-      image: null,
-      price: "50 B",
-      category: "Burmese Specials",
-    },
-  ]);
+  const [items, setItems] = useState(menuItems);
+
+  const [showAlertBox, setShowAlertBox] = useState(false);
+  const [newItemName, setNewItemName] = useState("");
+  const [newItemPrice, setNewItemPrice] = useState("");
+  const [newItemCategory, setNewItemCategory] = useState("");
+  const [newItemImage, setNewItemImage] = useState(null);
+
+  const closeAlert = () => {
+    setShowAlertBox(false);
+    setNewItemName("");
+    setNewItemPrice("");
+    setNewItemCategory("");
+    setNewItemImage(null);
+  };
 
   const handleAddItem = () => {
-    const name = prompt("Enter item name:");
-    const price = prompt("Enter item price:");
+    setShowAlertBox(true); // Show custom alert box
+  };
 
-    if (name && price) {
-      const newItem = {
-        _id: (items.length + 1).toString(),
-        name,
-        image: null,
-        price,
-        category: "Burmese Specials",
-      };
-      setItems([...items, newItem]);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setNewItemImage(imageUrl);
     }
   };
+
+  function handleAlertBoxSubmit() {
+    if (newItemName && newItemPrice && newItemCategory) {
+      const newItem = {
+        _id: (items.length + 1).toString(),
+        name: newItemName,
+        image: newItemImage,
+        price: newItemPrice,
+        category: newItemCategory,
+      };
+      setItems([...items, newItem]);
+      setShowAlertBox(false); // Close alert box
+      setNewItemName("");
+      setNewItemPrice("");
+      setNewItemCategory("");
+      setNewItemImage(null);
+      alert("Item added successfully!");
+    } else {
+      alert("Please fill in all required fields (name, price, and category).");
+    }
+  }
+
+  function handleAlertBoxCancel() {
+    setShowAlertBox(false);
+    setNewItemName("");
+    setNewItemPrice("");
+    setNewItemCategory("");
+    setNewItemImage(null);
+  }
 
   const handleEdit = (id) => {
     alert(`Edit item with ID: ${id}`);
   };
 
   const handleSave = (updatedItem) => {
-    console.log("Received updated item:", updatedItem); // Debug log
+    console.log("Received updated item:", updatedItem);
     setItems(
       items.map((item) =>
         item._id === updatedItem._id ? { ...item, ...updatedItem } : item
       )
     );
+    alert("Item saved successfully!");
   };
 
   const handleDelete = (id) => {
-    console.log("Deleting item with ID:", id); // Debug log
-    setItems(items.filter((item) => item._id !== id));
+    console.log("Deleting item with ID:", id);
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      setItems(items.filter((item) => item._id !== id));
+      alert("Item deleted successfully!");
+    }
   };
 
   return (
@@ -136,18 +109,73 @@ const ItemManagementDisplay = () => {
                 onAdd={handleAddItem}
               />
             ))}
-            {/* Add New Item row as the last row */}
-            {/* <tr>
-              <td colSpan="6"></td> 
-              <td colSpan="3" className="sidebar">
-                <button className="add-item-btn" onClick={handleAddItem}>
-                  ➕ Add New Item
-                </button>
-              </td>
-            </tr> */}
           </tbody>
         </table>
       </div>
+      {showAlertBox && (
+        <div className="custom-alert-box-item">
+          <div className="alert-box-content-item">
+            <i onClick={closeAlert} className="bi bi-x-lg" />
+            <div className="inputalign">
+              <div className="inputcontainer">
+                <h3>Enter Item Name</h3>
+                <input
+                  type="text"
+                  value={newItemName}
+                  onChange={(e) => setNewItemName(e.target.value)}
+                  placeholder="Enter item name"
+                  className="alert-box-input-item"
+                />
+              </div>
+              <div className="inputcontainer">
+                <h3>Enter Category Name</h3>
+                <input
+                  type="text"
+                  value={newItemCategory}
+                  onChange={(e) => setNewItemCategory(e.target.value)}
+                  placeholder="Enter category"
+                  className="alert-box-input-item"
+                />
+              </div>
+
+              <div className="inputcontainer">
+                <h3>Enter Price</h3>
+                <input
+                  type="text"
+                  value={newItemPrice}
+                  onChange={(e) => setNewItemPrice(e.target.value)}
+                  placeholder="Enter price (e.g., 50 B)"
+                  className="alert-box-input-item"
+                />
+              </div>
+              <div className="photo-upload">
+                {newItemImage ? (
+                  <img
+                    src={newItemImage}
+                    alt="Preview"
+                    className="photo-preview"
+                  />
+                ) : (
+                  <label className="upload-link">
+                    <h3 className="upload-photo-text">Upload Photo</h3>
+                    <span className="Click-upload-photo"> Click here </span>
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      accept="image/*"
+                      hidden
+                    />
+                  </label>
+                )}
+              </div>
+            </div>
+            <div className="alert-box-buttons-item">
+              <button onClick={handleAlertBoxSubmit}>Confirm</button>
+              <button onClick={handleAlertBoxCancel}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 .footer {
   position: fixed;
   bottom: 0;
-  padding: 20px 20px;
+  padding: 20px 80px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -9,28 +9,60 @@
   background-color: white;
 }
 .tableNumberShow {
-  padding: 15px 50px 15px 15px;
+  padding: 15px 20px 15px 15px;
   display: inline;
   border-radius: 10px;
   background-color: #d9d9d9;
+  font-family: "Poppins", sans-serif;
 }
 .tableNumberShow span {
   font-size: 16px;
-  font-family: "Poppins", sans-serif;
+
   font-weight: 800;
+}
+select.table-select {
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: 800;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  margin-left: 20px;
+}
+
+.table-select:focus {
+  border-color: #888;
 }
 
 button.gotoOrder {
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Poppins", sans-serif;
   font-weight: 800;
   background-color: #d9d9d9;
   color: black;
   border: none;
   border-radius: 10px;
-  padding: 15px 20px;
+  padding: 20px 20px;
   cursor: pointer;
   text-decoration: none;
+}
+.table-select option {
+  font-size: 16px;
+  color: black;
+  background-color: #d9d9d9;
+  padding: 8px;
+}
+
+.table-select option:hover {
+  background-color: #888 !important;
+  color: #000;
+}
+
+.table-select option:checked {
+  background-color: #888;
+  color: #fff;
 }
 @media screen and (max-width: 600px) {
   .tableNumberShow span {

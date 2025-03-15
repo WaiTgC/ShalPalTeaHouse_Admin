@@ -1,36 +1,45 @@
 .nav2_container {
+  padding: 0px 0px;
+  margin: 0px;
+}
+
+.navbar2 {
   background-color: #bfbfbf;
   border-bottom: 2px solid black;
   padding: 0px 0px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap;
+  width: 100%;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
   cursor: pointer;
-  user-select: none;
+  user-select: none; /* Prevents text selection */
   outline: none;
-  overflow: hidden;
 }
-.navbar1 {
-  padding: 0px 0px;
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.navnar2::-webkit-scrollbar {
+  display: none;
 }
 
 .nav2-list {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly; /* Allow items to overflow to the right */
   align-items: center;
   list-style: none;
   padding: 0px;
   margin: 0px;
+  min-width: max-content; /* Ensure the list doesn't shrink */
 }
 
 .nav2-item {
   font-size: 15px;
   font-family: "Poppins", sans-serif;
-  font-weight: 800;
+  font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
   outline: none;
-  overflow: hidden;
-  border: 1px solid black;
-  width: 550px;
+  width: 200px !important;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -46,21 +55,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
 .nav2-link.active {
-  background-color: #7f7f7f; /* Darker red for active state */
+  font-weight: 800;
 }
+
 .nav2-item:hover {
-  background-color: #7f7f7f; /* Lighter red on hover */
+  font-weight: 800;
 }
+
+/* Media Queries for Responsiveness */
 @media (max-width: 885px) {
   .nav2-item {
-    font-size: 11px; /* Slightly smaller for tablets */
+    font-size: 14px; /* More readable size for tablets */
+    width: 150px; /* Adjust width for smaller screens */
   }
 }
 
 @media (max-width: 576px) {
   .nav2-item {
-    font-size: 5px; /* Smaller for phones */
+    font-size: 12px; /* More readable size for phones */
+    width: 100px; /* Further reduce width for phones */
   }
 }
