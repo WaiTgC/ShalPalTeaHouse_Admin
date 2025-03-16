@@ -9,12 +9,12 @@ const Card = ({ name, price, image }) => {
     const now = new Date();
     const newOrder = {
       id: Date.now(),
-      tableNo: selectedTable,
+      tableNo: selectedTable, // Now a string like "A1"
       itemName: name,
       itemPrice: price,
-      date: now.toLocaleDateString("en-US", {
+      date: now.toLocaleDateString("en-GB", {
         day: "numeric",
-        month: "long",
+        month: "short",
         year: "numeric",
       }),
       time: now.toLocaleTimeString("en-US", {
@@ -22,8 +22,8 @@ const Card = ({ name, price, image }) => {
         minute: "2-digit",
         hour12: true,
       }),
-      status: "Pending",
     };
+    console.log("Order from Card:", newOrder);
     addOrder(newOrder);
   };
 

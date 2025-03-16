@@ -11,9 +11,18 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer; /* Indicates clickability */
   user-select: none;
   outline: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease,
+    background-color 0.1s ease; /* Smooth transition */
+}
+
+/* Active state when clicked */
+.card:active {
+  transform: scale(0.95); /* Slightly shrink the card */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Reduce shadow for "pressed" effect */
+  background-color: #d0d0d0; /* Darker gray when pressed */
 }
 
 .card-image {
@@ -42,6 +51,7 @@
   padding: 10px;
   overflow-y: hidden;
 }
+
 .card-price {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
@@ -49,4 +59,14 @@
   margin: 0;
   white-space: nowrap;
   padding: 10px;
+}
+@media screen and (max-width: 885px) {
+  .card {
+    margin: 0 auto; /* Center horizontally */
+  }
+}
+@media screen and (max-width: 480px) {
+  .card {
+    margin: 0 auto; /* Center horizontally */
+  }
 }

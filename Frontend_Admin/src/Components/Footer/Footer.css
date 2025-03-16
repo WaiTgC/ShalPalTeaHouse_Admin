@@ -73,3 +73,26 @@ button.gotoOrder {
     padding: 15px 20px;
   }
 }
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 20px 50px;
+  }
+  .tableNumberShow {
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tableNumberShow span {
+    font-size: 10px;
+    margin-left: 10px;
+  }
+  select.table-select {
+    margin-left: 0px;
+    font-size: 16px;
+  }
+  button.gotoOrder {
+    font-size: 10px;
+    padding: 10px 15px;
+  }
+}

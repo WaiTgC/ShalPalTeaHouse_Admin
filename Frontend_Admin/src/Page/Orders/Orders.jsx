@@ -4,13 +4,11 @@ import OrderCardDisplay from "../../Components/OrderCardDisplay/OrderCardDisplay
 
 const Orders = () => {
   return (
-    <div>
-      <Layout_2>
-        <div className="create-order-content">
-          <OrderCardDisplay />
-        </div>
-      </Layout_2>
-    </div>
+    <Layout_2>
+      <div className="create-order-content">
+        <OrderCardDisplay />
+      </div>
+    </Layout_2>
   );
 };
 
