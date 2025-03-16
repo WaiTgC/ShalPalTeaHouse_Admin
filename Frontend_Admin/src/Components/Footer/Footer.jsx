@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import { tableNo } from "../../assets/assets";
+import { useOrderContext } from "../../Context/OrderProvider";
 
 const Footer = () => {
-  const [selectedTable, setSelectedTable] = useState("A1"); // Default to A1
+  const { selectedTable, setSelectedTable, addOrder } = useOrderContext();
 
   const handleTableChange = (e) => {
     setSelectedTable(e.target.value);
+  };
+
+  const handleOrder = () => {
+    const now = new Date();
+    const newOrder = {
+      id: Date.now(),
+      tableNo: selectedTable,
+      date: now.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }),
+      time: now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }),
+      status: "Pending",
+    };
+    addOrder(newOrder);
   };
 
   return (
@@ -27,7 +48,9 @@ const Footer = () => {
         </select>
       </div>
       <Link to="/Orders">
-        <button className="gotoOrder">Order</button>
+        <button className="gotoOrder" onClick={handleOrder}>
+          Order
+        </button>
       </Link>
     </div>
   );

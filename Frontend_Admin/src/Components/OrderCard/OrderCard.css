@@ -1,0 +1,28 @@
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-table,
+.order-item,
+.order-price,
+.order-date,
+.order-time,
+.order-status {
+  font-size: 16px;
+  color: #333;
+}
+
+.order-status {
+  font-weight: bold;
+  color: #007bff;
+}

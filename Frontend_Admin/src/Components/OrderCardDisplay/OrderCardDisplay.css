@@ -1,0 +1,23 @@
+.order-display {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.order-display h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.order-display p {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+}
