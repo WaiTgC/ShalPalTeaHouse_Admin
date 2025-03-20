@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import ItemManagementCard from "../ItemManagementCard/ItemManagementCard";
 import "./ItemManagementDisplay.css";
-import { menuItems } from "../../assets/assets";
+import { useOrderContext } from "../../Context/OrderProvider";
 
 const ItemManagementDisplay = () => {
-  const [items, setItems] = useState(menuItems);
-
+  const { items, addItem, updateItem, deleteItem } = useOrderContext();
   const [showAlertBox, setShowAlertBox] = useState(false);
   const [newItemName, setNewItemName] = useState("");
   const [newItemPrice, setNewItemPrice] = useState("");
@@ -35,18 +34,14 @@ const ItemManagementDisplay = () => {
   function handleAlertBoxSubmit() {
     if (newItemName && newItemPrice && newItemCategory) {
       const newItem = {
-        _id: (items.length + 1).toString(),
+        _id: (items.length + 1).toString(), // Ensure unique ID
         name: newItemName,
         image: newItemImage,
         price: newItemPrice,
         category: newItemCategory,
       };
-      setItems([...items, newItem]);
-      setShowAlertBox(false); // Close alert box
-      setNewItemName("");
-      setNewItemPrice("");
-      setNewItemCategory("");
-      setNewItemImage(null);
+      addItem(newItem);
+      closeAlert(); // Close alert box and reset fields
       alert("Item added successfully!");
     } else {
       alert("Please fill in all required fields (name, price, and category).");
@@ -54,11 +49,7 @@ const ItemManagementDisplay = () => {
   }
 
   function handleAlertBoxCancel() {
-    setShowAlertBox(false);
-    setNewItemName("");
-    setNewItemPrice("");
-    setNewItemCategory("");
-    setNewItemImage(null);
+    closeAlert();
   }
 
   const handleEdit = (id) => {
@@ -67,18 +58,14 @@ const ItemManagementDisplay = () => {
 
   const handleSave = (updatedItem) => {
     console.log("Received updated item:", updatedItem);
-    setItems(
-      items.map((item) =>
-        item._id === updatedItem._id ? { ...item, ...updatedItem } : item
-      )
-    );
+    updateItem(updatedItem);
     alert("Item saved successfully!");
   };
 
   const handleDelete = (id) => {
     console.log("Deleting item with ID:", id);
     if (window.confirm("Are you sure you want to delete this item?")) {
-      setItems(items.filter((item) => item._id !== id));
+      deleteItem(id);
       alert("Item deleted successfully!");
     }
   };
@@ -137,7 +124,6 @@ const ItemManagementDisplay = () => {
                   className="alert-box-input-item"
                 />
               </div>
-
               <div className="inputcontainer">
                 <h3>Enter Price</h3>
                 <input

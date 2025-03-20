@@ -1,24 +1,7 @@
 import React from "react";
 import "./OrderCard.css";
 
-const OrderCard = ({
-  tableNo,
-  itemName,
-  itemPrice,
-  date,
-  time,
-  status,
-  onClick,
-}) => {
-  console.log("OrderCard props:", {
-    tableNo,
-    itemName,
-    itemPrice,
-    date,
-    time,
-    status,
-  }); // Debug log
-
+const OrderCard = ({ tableNo, date, time, status, onClick }) => {
   return (
     <div className="order-card" onClick={onClick}>
       <div className="order-details">

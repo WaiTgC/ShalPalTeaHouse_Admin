@@ -1,10 +1,11 @@
 import React from "react";
+import "./EmployeeManagement.css";
+import EmployeeManagementDisplay from "../EmployeeManagementDisplay/EmployeeManagementDisplay";
 
 const EmployeeManagement = () => {
   return (
-    <div>
-      <h1>Employee Management</h1>
-      <p>Manage employees here.</p>
+    <div className="employee-management-content">
+      <EmployeeManagementDisplay />
     </div>
   );
 };

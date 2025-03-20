@@ -96,7 +96,7 @@ const ItemManagementCard = ({
         {showAddButton ? (
           <button className="add-category-btn" onClick={onAdd}>
             <i className="bi bi-plus-circle" />
-            <span className="text-add">Add New Category</span>
+            <span className="text-add">Add New Item</span>
           </button>
         ) : null}
       </td>

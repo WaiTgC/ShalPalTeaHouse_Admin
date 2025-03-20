@@ -1,4 +1,4 @@
-.order-card {
+.order-history-card {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
@@ -7,34 +7,38 @@
   cursor: pointer;
   user-select: none;
   outline: none;
-  cursor: pointer;
   background-color: #d9d9d9;
   transition: all 0.2s ease-in-out;
 }
-.order-card:hover {
+.order-history-card:hover {
   background-color: #7f7f7f;
 }
 
-.order-details {
+.order-history-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.order-table,
-.order-item,
-.order-price,
-.order-date,
-.order-time,
-.order-status {
+.order-history-table,
+.order-history-date-time,
+.order-history-status,
+.order-history-completed {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 16px;
   color: #333;
 }
 
-.order-status {
+.order-history-status {
   font-weight: bold;
-  color: black;
+  color: #28a745; /* Green for Completed status */
+}
+
+.view-btn {
+  width: 100px;
+  height: 34px;
+  background-color: #d9d9d9;
 }

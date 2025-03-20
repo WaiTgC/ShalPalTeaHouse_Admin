@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Footer.css";
-import { Link } from "react-router-dom";
 import { useOrderContext } from "../../Context/OrderProvider";
+import { useNavigate } from "react-router-dom"; // For navigation
 
 const Footer = () => {
-  const { selectedTable, setSelectedTable, addOrder, tableNo } =
-    useOrderContext();
+  const {
+    selectedTable,
+    setSelectedTable,
+    addOrder,
+    tableNo,
+    pendingItems,
+    clearPendingItems,
+    orders, // Access orders at the top level
+  } = useOrderContext(); // Call hook at the top level
+  const [showOrderAlert, setShowOrderAlert] = useState(false); // State for alert box
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleTableChange = (e) => {
     const newTable = e.target.value;
@@ -14,23 +23,27 @@ const Footer = () => {
   };
 
   const handleOrder = () => {
-    const now = new Date();
-    const newOrder = {
-      id: Date.now(),
-      tableNo: selectedTable, // Now a string like "A1"
-      date: now.toLocaleDateString("en-GB", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      }),
-      time: now.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      }),
-    };
-    console.log("Order from Footer:", newOrder);
-    addOrder(newOrder);
+    const tablePendingItems = pendingItems[selectedTable] || [];
+    console.log("Pending Items for", selectedTable, ":", tablePendingItems);
+    if (tablePendingItems.length === 0) {
+      console.log("No items to order for table:", selectedTable);
+      alert("No items to order for this table!");
+      return;
+    }
+
+    addOrder(selectedTable, tablePendingItems);
+    clearPendingItems(selectedTable);
+    console.log("Orders after adding:", orders); // Use the orders variable
+    setShowOrderAlert(true); // Show the alert box
+  };
+
+  const handleViewOrder = () => {
+    setShowOrderAlert(false); // Close the alert box
+    navigate("/orders"); // Navigate to the orders page (lowercase to match route)
+  };
+
+  const handleCloseAlert = () => {
+    setShowOrderAlert(false); // Close the alert box without navigation
   };
 
   return (
@@ -49,11 +62,20 @@ const Footer = () => {
           ))}
         </select>
       </div>
-      <Link to="/Orders">
-        <button className="gotoOrder" onClick={handleOrder}>
-          Order
-        </button>
-      </Link>
+      <button className="gotoOrder" onClick={handleOrder}>
+        Add Order
+      </button>
+      {showOrderAlert && (
+        <div className="alert-overlay-ordered">
+          <div className="alert-box-ordered">
+            <i onClick={handleCloseAlert} className="bi bi-x-lg"></i>
+            <h3>Orders Created Successfully</h3>
+            <button className="view-order-button" onClick={handleViewOrder}>
+              View Order
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

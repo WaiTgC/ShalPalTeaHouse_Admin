@@ -3,7 +3,6 @@ import "./TableCard.css";
 import { assets } from "../../assets/assets";
 
 const TableCard = ({ name, onDelete }) => {
-  // Added onDelete to props
   const [showTableDelete, setShowTableDelete] = useState(false);
   const [showTableEdit, setShowTableEdit] = useState(false);
 
@@ -16,7 +15,7 @@ const TableCard = ({ name, onDelete }) => {
 
   const closeAlert = () => {
     setShowTableDelete(false);
-    setShowTableEdit(false); // Function to close the alert
+    setShowTableEdit(false);
   };
 
   const handleDeleteConfirm = () => {
@@ -60,11 +59,10 @@ const TableCard = ({ name, onDelete }) => {
               <h2>SHAL PAL</h2> <span>Tea House</span>
             </div>
             <i onClick={closeAlert} className="bi bi-x-lg"></i>
-
             <span className="table-number-text">Table Number:</span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Input Table Number"
             />
             <hr />

@@ -1,0 +1,54 @@
+.Checkout-Display {
+  padding: 50px 100px;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+.checkout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  user-select: none;
+  overflow-y: hidden;
+  cursor: pointer;
+  outline: none;
+}
+
+.checkout-header h2 {
+  font-size: 24px;
+  margin: 0;
+  overflow-y: hidden;
+}
+
+.checkout-filters {
+  display: flex;
+  gap: 20px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.filter-group select {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.Checkout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 70px;
+  padding: 20px;
+}

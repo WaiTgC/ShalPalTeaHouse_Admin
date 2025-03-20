@@ -17,10 +17,15 @@ import food_13 from "./Food_13.svg";
 import food_14 from "./Food_14.svg";
 
 import food_15 from "./image-1.svg";
-import food_16 from "./image-2.svg";
-import food_17 from "./image-3.svg";
-import food_18 from "./image-4.svg";
-import food_19 from "./image.svg";
+
+import drink_1 from "./drink_(1).svg";
+import drink_2 from "./drink_(2).svg";
+import drink_3 from "./drink_(3).svg";
+import drink_4 from "./drink_(4).svg";
+import drink_5 from "./drink_(5).svg";
+import drink_6 from "./drink_(6).svg";
+import drink_7 from "./drink_(7).svg";
+import drink_8 from "./drink_(8).svg";
 
 import set_A from "./set a 1.svg";
 import set_B from "./set b 1.svg";
@@ -30,7 +35,36 @@ export const assets = {
   campchair,
   logo,
 };
-
+export const employees = [
+  {
+    _id: "1",
+    name: "Aung Aung",
+    Role: "Manager",
+    Section: "Afternoon",
+    Phone: "09-12345678",
+  },
+  {
+    _id: "2",
+    name: "Maung Maung",
+    Role: "Chef",
+    Section: "Afternoon",
+    Phone: "08-12345678",
+  },
+  {
+    _id: "3",
+    name: "Naung Naung",
+    Role: "Waiter",
+    Section: "Afternoon",
+    Phone: "09-12445678",
+  },
+  {
+    _id: "4",
+    name: "Kaung Kaung ",
+    Role: "Owner",
+    Section: "Afternoon",
+    Phone: "09-22345678",
+  },
+];
 export const tableNo = [
   { id: 1, name: "A1", image: null },
   { id: 2, name: "A2", image: null },
@@ -157,7 +191,7 @@ export const menuItems = [
   },
   {
     _id: "15",
-    name: "Rakhine Rice Noodle Soup",
+    name: "Rakhine  Noodle Soup",
     image: food_15,
     price: "50 B",
     description: "Rakhine Traditional Soup",
@@ -165,38 +199,70 @@ export const menuItems = [
   },
   {
     _id: "16",
-    name: "Fried Noodle",
-    image: food_16,
-    price: "50 B",
-    description: "Burmese Traditional Salad",
-    category: "Today's Specials",
+    name: "Regular Tea",
+    image: drink_1,
+    price: "40 B",
+    description: "Burmese Tea",
+    category: "Drinks",
   },
   {
     _id: "17",
-    name: "Fried Noodle",
-    image: food_17,
-    price: "50 B",
-    description: "Burmese Traditional Salad",
-    category: "Today's Specials",
+    name: "Slightly Rich Tea",
+    image: drink_2,
+    price: "40 B",
+    description: "Burmese Tea",
+    category: " Drinks",
   },
   {
     _id: "18",
-    name: "Fried Noodle",
-    image: food_18,
-    price: "50 B",
-    description: "Burmese Traditional Salad",
-    category: "Today's Specials",
+    name: "Sweet & Rich Tea",
+    image: drink_3,
+    price: "40 B",
+    description: "Burmese Tea",
+    category: "Drinks",
   },
   {
     _id: "19",
-    name: "Fried Noodle",
-    image: food_19,
+    name: "Sweet & Astringent Tea",
+    image: drink_4,
     price: "50 B",
-    description: "Burmese Traditional Salad",
-    category: "Today's Specials",
+    description: "Burmese Tea",
+    category: "Drinks",
   },
   {
     _id: "20",
+    name: "Astringent & Rich Tea",
+    image: drink_5,
+    price: "50 B",
+    description: "Burmese Tea",
+    category: "Drinks",
+  },
+  {
+    _id: "21",
+    name: "Bland & Sweet Tea",
+    image: drink_6,
+    price: "50 B",
+    description: "Burmese Tea",
+    category: "Drinks",
+  },
+  {
+    _id: "22",
+    name: "Silone Tea",
+    image: drink_7,
+    price: "75 B",
+    description: "Burmese Tea",
+    category: "Drinks",
+  },
+  {
+    _id: "23",
+    name: "Burmese Tea Cold",
+    image: drink_8,
+    price: "50 B",
+    description: "Burmese Tea",
+    category: "Drinks",
+  },
+  {
+    _id: "24",
     name: "Set A",
     image: set_A,
     price: "169 B",
@@ -204,7 +270,7 @@ export const menuItems = [
     category: "Combo's Sets",
   },
   {
-    _id: "21",
+    _id: "25",
     name: "Set B",
     image: set_B,
     price: "189 B",
@@ -212,7 +278,7 @@ export const menuItems = [
     category: "Combo's Sets",
   },
   {
-    _id: "22",
+    _id: "26",
     name: "Set C",
     image: set_C,
     price: "220 B",

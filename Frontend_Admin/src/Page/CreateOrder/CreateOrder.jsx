@@ -5,13 +5,11 @@ import CardDisplay from "../../Components/CardDisplay/CardDisplay";
 
 const CreateOrder = () => {
   return (
-    <div>
-      <Layout_1>
-        <div className="create-order-content">
-          <CardDisplay />
-        </div>
-      </Layout_1>
-    </div>
+    <Layout_1>
+      <div className="create-order-content">
+        <CardDisplay />
+      </div>
+    </Layout_1>
   );
 };
 
