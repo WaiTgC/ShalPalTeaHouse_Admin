@@ -9,13 +9,31 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
   const [invoiceData, setInvoiceData] = useState({
     items: [],
     subtotal: "0.00",
-    vat: "0.00",
+    taxes: [],
+    charges: [],
+    discounts: [],
     grandTotal: "0.00",
     dateTime: "N/A",
-  }); // Store invoice data for display
-  const { getInProcessOrders, completeOrder } = useOrderContext();
+    paymentMethod: "",
+  });
+  const {
+    getInProcessOrders,
+    getTableOrders,
+    completeOrder,
+    taxes,
+    charges,
+    discounts,
+    paymentOptions,
+  } = useOrderContext();
 
   const tableOrders = getInProcessOrders(name);
+  const newOrders = getTableOrders(name);
+
+  let cardColorClass = "";
+  if (newOrders.length > 0) cardColorClass = "new-order";
+  else if (tableOrders.length > 0 && !hasCheckedOut)
+    cardColorClass = "in-process";
+  else cardColorClass = "normal";
 
   const handleCardClick = () => {
     if (tableOrders.length === 0 && !hasCheckedOut) {
@@ -23,55 +41,97 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
       return;
     }
     if (tableOrders.length > 0 && !hasCheckedOut) {
-      // Calculate and store invoice data before checkout
-      const allItems = tableOrders.reduce((acc, order) => {
-        return [...acc, ...order.items];
-      }, []);
+      const allItems = tableOrders.reduce(
+        (acc, order) => [...acc, ...order.items],
+        []
+      );
       const items = getTableItems(allItems);
-      const totalAmount = getTotalAmount(allItems);
-      const vatRate = 0.07;
-      const subtotal = parseFloat(totalAmount);
-      const vat = (subtotal * vatRate).toFixed(2);
-      const grandTotal = (subtotal + parseFloat(vat)).toFixed(2);
+      const subtotal = parseFloat(getTotalAmount(allItems));
+      const enabledTaxes = taxes
+        .filter((tax) => tax.enabled)
+        .map((tax) => ({
+          name: tax.name,
+          rate: tax.rate,
+          amount: (subtotal * (tax.rate / 100)).toFixed(2),
+        }));
+      const enabledCharges = charges
+        .filter((charge) => charge.enabled)
+        .map((charge) => ({
+          name: charge.name,
+          rate: charge.rate,
+          amount: (subtotal * (charge.rate / 100)).toFixed(2),
+        }));
+      const enabledDiscounts = discounts
+        .filter((discount) => discount.enabled)
+        .map((discount) => ({
+          name: discount.name,
+          rate: discount.rate,
+          amount: (subtotal * (discount.rate / 100)).toFixed(2),
+        }));
+      const totalTaxAmount = enabledTaxes.reduce(
+        (sum, tax) => sum + parseFloat(tax.amount),
+        0
+      );
+      const totalChargeAmount = enabledCharges.reduce(
+        (sum, charge) => sum + parseFloat(charge.amount),
+        0
+      );
+      const totalDiscountAmount = enabledDiscounts.reduce(
+        (sum, discount) => sum + parseFloat(discount.amount),
+        0
+      );
+      const grandTotal = (
+        subtotal +
+        totalTaxAmount +
+        totalChargeAmount -
+        totalDiscountAmount
+      ).toFixed(2);
       const firstOrder = tableOrders[0];
       const dateTime = firstOrder
         ? `${firstOrder.date} | ${firstOrder.time}`
         : "N/A";
+      const defaultPayment =
+        paymentOptions.find((opt) => opt.enabled)?.name || "Cash";
 
       setInvoiceData({
         items,
         subtotal: subtotal.toFixed(2),
-        vat,
+        taxes: enabledTaxes,
+        charges: enabledCharges,
+        discounts: enabledDiscounts,
         grandTotal,
         dateTime,
+        paymentMethod: defaultPayment,
       });
     }
     setShowModal(true);
   };
 
   const handleCheckout = () => {
-    console.log(`Checking out for table ${name}`);
-    // Move each order to history
-    tableOrders.forEach((order) => {
-      completeOrder(order, orderType, staffName);
-    });
-    setHasCheckedOut(true); // Hide the Checkout button
-    // Modal stays open, and invoice data is already stored
+    console.log(
+      `Checking out for table ${name} with payment: ${invoiceData.paymentMethod}`
+    );
+    tableOrders.forEach((order) =>
+      completeOrder(order, orderType, staffName, invoiceData.paymentMethod)
+    );
+    setHasCheckedOut(true);
   };
 
   const handlePrint = () => {
     console.log(`Printing receipt for table ${name}`);
     window.print();
-    alert("No item to check out"); // Show alert
-    setShowModal(false); // Close modal
-    setHasCheckedOut(false); // Reset for next order
+    setShowModal(false);
+    setHasCheckedOut(false);
     setInvoiceData({
       items: [],
       subtotal: "0.00",
-      vat: "0.00",
+      taxes: [],
+      charges: [],
+      discounts: [],
       grandTotal: "0.00",
       dateTime: "N/A",
-    }); // Reset invoice data
+      paymentMethod: "",
+    });
   };
 
   const handleCloseModal = () => {
@@ -80,9 +140,12 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
     setInvoiceData({
       items: [],
       subtotal: "0.00",
-      vat: "0.00",
+      taxes: [],
+      charges: [],
+      discounts: [],
       grandTotal: "0.00",
       dateTime: "N/A",
+      paymentMethod: "",
     });
   };
 
@@ -90,7 +153,6 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
     const validItems = items.filter(
       (item) => item.itemName && !isNaN(parseFloat(item.itemPrice))
     );
-
     const itemMap = validItems.reduce((acc, item) => {
       const key = `${item.itemName}-${item.itemPrice}`;
       if (!acc[key]) {
@@ -106,7 +168,6 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
       acc[key].ids.push(item.id);
       return acc;
     }, {});
-
     return Object.values(itemMap).map((item) => ({
       ...item,
       amount: (item.qty * parseFloat(item.itemPrice)).toFixed(2),
@@ -120,7 +181,6 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
       .toFixed(2);
   };
 
-  // Use invoiceData if hasCheckedOut is true, otherwise calculate from tableOrders
   const displayItems = hasCheckedOut
     ? invoiceData.items
     : getTableItems(
@@ -131,21 +191,74 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
     : getTotalAmount(
         tableOrders.reduce((acc, order) => [...acc, ...order.items], [])
       );
-  const displayVat = hasCheckedOut
-    ? invoiceData.vat
-    : (parseFloat(displaySubtotal) * 0.07).toFixed(2);
+  const displayTaxes = hasCheckedOut
+    ? invoiceData.taxes
+    : taxes
+        .filter((tax) => tax.enabled)
+        .map((tax) => ({
+          name: tax.name,
+          rate: tax.rate,
+          amount: (parseFloat(displaySubtotal) * (tax.rate / 100)).toFixed(2),
+        }));
+  const displayCharges = hasCheckedOut
+    ? invoiceData.charges
+    : charges
+        .filter((charge) => charge.enabled)
+        .map((charge) => ({
+          name: charge.name,
+          rate: charge.rate,
+          amount: (parseFloat(displaySubtotal) * (charge.rate / 100)).toFixed(
+            2
+          ),
+        }));
+  const displayDiscounts = hasCheckedOut
+    ? invoiceData.discounts
+    : discounts
+        .filter((discount) => discount.enabled)
+        .map((discount) => ({
+          name: discount.name,
+          rate: discount.rate,
+          amount: (parseFloat(displaySubtotal) * (discount.rate / 100)).toFixed(
+            2
+          ),
+        }));
+  const totalTaxAmount = displayTaxes.reduce(
+    (sum, tax) => sum + parseFloat(tax.amount),
+    0
+  );
+  const totalChargeAmount = displayCharges.reduce(
+    (sum, charge) => sum + parseFloat(charge.amount),
+    0
+  );
+  const totalDiscountAmount = displayDiscounts.reduce(
+    (sum, discount) => sum + parseFloat(discount.amount),
+    0
+  );
   const displayGrandTotal = hasCheckedOut
     ? invoiceData.grandTotal
-    : (parseFloat(displaySubtotal) + parseFloat(displayVat)).toFixed(2);
+    : (
+        parseFloat(displaySubtotal) +
+        totalTaxAmount +
+        totalChargeAmount -
+        totalDiscountAmount
+      ).toFixed(2);
   const displayDateTime = hasCheckedOut
     ? invoiceData.dateTime
     : tableOrders[0]
     ? `${tableOrders[0].date} | ${tableOrders[0].time}`
     : "N/A";
+  const displayPaymentMethod = hasCheckedOut ? invoiceData.paymentMethod : "";
+  const paymentImage = paymentOptions.find(
+    (opt) =>
+      opt.name === displayPaymentMethod && opt.enabled && opt.showImageInInvoice
+  )?.image;
 
   return (
     <>
-      <div className="checkout-card" onClick={handleCardClick}>
+      <div
+        className={`checkout-card ${cardColorClass}`}
+        onClick={handleCardClick}
+      >
         <h3>{name}</h3>
       </div>
       {showModal && (
@@ -210,9 +323,23 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
                 <p>
                   Subtotal: <span>{displaySubtotal} B</span>
                 </p>
-                <p>
-                  Vat (7%): <span>{displayVat} B</span>
-                </p>
+                {displayTaxes.map((tax, index) => (
+                  <p key={index}>
+                    {tax.name} ({tax.rate}%): <span>{tax.amount} B</span>
+                  </p>
+                ))}
+                {displayCharges.map((charge, index) => (
+                  <p key={index}>
+                    {charge.name} ({charge.rate}%):{" "}
+                    <span>{charge.amount} B</span>
+                  </p>
+                ))}
+                {displayDiscounts.map((discount, index) => (
+                  <p key={index}>
+                    {discount.name} ({discount.rate}%):{" "}
+                    <span>-{discount.amount} B</span>
+                  </p>
+                ))}
                 <p>
                   Total: <span>{displayGrandTotal} B</span>
                 </p>
@@ -220,7 +347,18 @@ const CheckoutCard = ({ name, orderType, staffName }) => {
             </div>
             <div className="payment">
               <p>Thank You and See You Again</p>
-              <div className="Qr"></div>
+              {hasCheckedOut && displayPaymentMethod && (
+                <p>Paid via: {displayPaymentMethod}</p>
+              )}
+              <div className="Qr">
+                {paymentImage && (
+                  <img
+                    src={paymentImage}
+                    alt="Payment Method"
+                    className="payment-image"
+                  />
+                )}
+              </div>
             </div>
             <div className="invoice-buttons">
               {!hasCheckedOut && tableOrders.length > 0 && (

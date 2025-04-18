@@ -9,7 +9,7 @@
   outline: none;
 }
 
-button.add-category-btn {
+td.actions .add-category-btn {
   display: flex;
   flex-direction: column;
   border: none;
@@ -17,10 +17,10 @@ button.add-category-btn {
   margin-top: -80px;
   background-color: transparent;
 }
-i.bi.bi-plus-circle {
+td.actions .add-category-btn i.bi.bi-plus-circle {
   font-size: 50px;
 }
-span.text-add {
+td .actions .add-category-btn span.text-add {
   font-weight: 600;
 }
 td.actions {
@@ -43,7 +43,7 @@ td.actions {
   padding: 8px;
   vertical-align: middle;
   font-family: "Poppins", sans-serif;
-  background-color: #d9d9d9;
+  background-color: #e5cf87;
 }
 
 .category-table td {
@@ -156,4 +156,18 @@ td.actions {
 
 .alert-box-buttons button:last-child:hover {
   background-color: #d9d9d9a7;
+}
+
+@media screen and (max-width: 480px) {
+  .table-container {
+    width: 100%;
+    margin-bottom: 150px;
+  }
+  .add-category-btn {
+    width: 100%;
+    position: absolute;
+    bottom: auto;
+    left: 0;
+    transform: translate(-0%, 140%);
+  }
 }

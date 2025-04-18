@@ -11,8 +11,24 @@ const OrderHistoryCardDisplay = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [filterTable, setFilterTable] = useState("All");
   const [filterDate, setFilterDate] = useState(null);
+  const [dateInput, setDateInput] = useState("");
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   // Generate calendar days for the current month
   const generateCalendarDays = () => {
@@ -31,15 +47,64 @@ const OrderHistoryCardDisplay = () => {
     return days;
   };
 
-  // Handle date selection
+  // Handle date selection from calendar
   const handleDateSelect = (day) => {
     if (day) {
-      setFilterDate({
+      const newFilterDate = {
         day,
         month: currentMonth + 1,
         year: currentYear,
-      });
+      };
+      setFilterDate(newFilterDate);
+      setDateInput(`${day}-${newFilterDate.month}-${newFilterDate.year}`);
       setShowCalendarModal(false);
+    }
+  };
+
+  // Handle manual date input with flexible parsing
+  const handleDateInputChange = (e) => {
+    const value = e.target.value.trim().toLowerCase();
+    setDateInput(value);
+
+    const currentYearNow = new Date().getFullYear();
+    let day = null;
+    let month = null;
+    let year = null;
+
+    // Split input by spaces, hyphens, or any separator
+    const parts = value.split(/[\s-]+/).filter(Boolean);
+
+    for (const part of parts) {
+      // Check if it's a number (could be day or year)
+      if (!isNaN(part)) {
+        const num = parseInt(part);
+        if (num >= 1 && num <= 31 && !day) {
+          day = num; // Assume it's a day if not already set
+        } else if (num >= 2000 && num <= currentYearNow + 10) {
+          year = num; // Assume it's a year
+        } else if (num >= 1 && num <= 12 && !month) {
+          month = num; // Assume it's a month if no month yet
+        }
+      } else {
+        // Check if it's a month name (full or partial)
+        const matchedMonth = months.findIndex((m) =>
+          m.toLowerCase().startsWith(part)
+        );
+        if (matchedMonth !== -1) {
+          month = matchedMonth + 1;
+        }
+      }
+    }
+
+    // Set filterDate based on what was parsed
+    if (day || month || year) {
+      setFilterDate({
+        day: day || null,
+        month: month || null,
+        year: year || null,
+      });
+    } else {
+      setFilterDate(null); // Clear filter if nothing valid is parsed
     }
   };
 
@@ -66,13 +131,42 @@ const OrderHistoryCardDisplay = () => {
 
     let matchesDate = true;
     if (filterDate) {
-      const [orderDay, orderMonth, orderYear] = order.date
-        .split("-")
-        .map(Number);
-      matchesDate =
-        orderDay === filterDate.day &&
-        orderMonth === filterDate.month &&
-        orderYear === filterDate.year;
+      const [orderDay, orderMonthStr, orderYear] = order.date.split(" ");
+      const orderMonth =
+        [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ].indexOf(orderMonthStr) + 1;
+      const orderDayNum = parseInt(orderDay);
+      const orderYearNum = parseInt(orderYear);
+
+      if (filterDate.day && filterDate.month && filterDate.year) {
+        // Full date filter
+        matchesDate =
+          orderDayNum === filterDate.day &&
+          orderMonth === filterDate.month &&
+          orderYearNum === filterDate.year;
+      } else if (filterDate.month && filterDate.year) {
+        // Month and year filter
+        matchesDate =
+          orderMonth === filterDate.month && orderYearNum === filterDate.year;
+      } else if (filterDate.month) {
+        // Month only filter
+        matchesDate = orderMonth === filterDate.month;
+      } else if (filterDate.year) {
+        // Year only filter
+        matchesDate = orderYearNum === filterDate.year;
+      }
     }
 
     return matchesTable && matchesDate;
@@ -117,11 +211,9 @@ const OrderHistoryCardDisplay = () => {
 
   const getTotalAmount = (items) => {
     const tableItems = getTableItems(items);
-    const total = tableItems.reduce(
-      (sum, item) => sum + parseFloat(item.amount),
-      0
-    );
-    return total.toFixed(2);
+    return tableItems
+      .reduce((sum, item) => sum + parseFloat(item.amount), 0)
+      .toFixed(2);
   };
 
   const handleTableFilterChange = (e) => {
@@ -135,7 +227,6 @@ const OrderHistoryCardDisplay = () => {
       <div className="order-history-header">
         <h2>Order History</h2>
         <div className="d-flex align-items-center">
-          {/* Filter by Table */}
           <div className="table-filter mr-3">
             <span>Filter by Table: </span>
             <select
@@ -151,7 +242,6 @@ const OrderHistoryCardDisplay = () => {
               ))}
             </select>
           </div>
-          {/* Filter by Date */}
           <div className="date-filter d-flex align-items-center">
             <span
               className="calendar-icon input-group-text"
@@ -165,14 +255,14 @@ const OrderHistoryCardDisplay = () => {
             >
               <i className="bi bi-calendar"></i>
             </span>
-            <span
-              className="date-display input-group-text ml-2"
-              style={{ width: "120px" }}
-            >
-              {filterDate
-                ? `${filterDate.day}-${filterDate.month}-${filterDate.year}`
-                : "Select a date"}
-            </span>
+            <input
+              type="text"
+              value={dateInput}
+              onChange={handleDateInputChange}
+              placeholder="e.g., April, 2021, 07-04-2021"
+              className="date-input form-control"
+              style={{ width: "200px" }}
+            />
           </div>
         </div>
       </div>
@@ -181,7 +271,15 @@ const OrderHistoryCardDisplay = () => {
           No order history for{" "}
           {filterTable === "All" ? "any table" : `Table ${filterTable}`}{" "}
           {filterDate
-            ? `on ${filterDate.day}-${filterDate.month}-${filterDate.year}`
+            ? filterDate.day && filterDate.month && filterDate.year
+              ? `on ${filterDate.day}-${filterDate.month}-${filterDate.year}`
+              : filterDate.month && filterDate.year
+              ? `in ${months[filterDate.month - 1]} ${filterDate.year}`
+              : filterDate.month
+              ? `in ${months[filterDate.month - 1]}`
+              : filterDate.year
+              ? `in ${filterDate.year}`
+              : ""
             : ""}
           .
         </p>
@@ -198,7 +296,6 @@ const OrderHistoryCardDisplay = () => {
           ))}
         </div>
       )}
-      {/* Calendar Modal */}
       {showCalendarModal && (
         <div
           className="calendar-overlay"
@@ -211,20 +308,7 @@ const OrderHistoryCardDisplay = () => {
                 onChange={handleMonthChange}
                 className="month-select"
               >
-                {[
-                  "January",
-                  "February",
-                  "March",
-                  "April",
-                  "May",
-                  "June",
-                  "July",
-                  "August",
-                  "September",
-                  "October",
-                  "November",
-                  "December",
-                ].map((month, index) => (
+                {months.map((month, index) => (
                   <option key={index} value={index}>
                     {month}
                   </option>
@@ -265,7 +349,6 @@ const OrderHistoryCardDisplay = () => {
           </div>
         </div>
       )}
-      {/* Order Details Modal */}
       {showModal && selectedOrder && (
         <div className="viewhistory-overlay">
           <div className="viewhistory-box">
@@ -275,7 +358,8 @@ const OrderHistoryCardDisplay = () => {
             </div>
             <p>Order Type: {selectedOrder.orderType}</p>
             <p>Staff Name: {selectedOrder.staffName || "Not Selected"}</p>
-            <table className="table table-striped">
+            <p>Paid via: {selectedOrder.paymentMethod || "Cash"}</p>
+            <table className="table">
               <thead>
                 <tr>
                   <th>Items</th>
@@ -298,7 +382,7 @@ const OrderHistoryCardDisplay = () => {
               </tbody>
               <tfoot>
                 <tr>
-                  <td colSpan="3" style={{ textAlign: "right" }}>
+                  <td colSpan="3" style={{ textAlign: "left" }}>
                     <strong>Total:</strong>
                   </td>
                   <td>

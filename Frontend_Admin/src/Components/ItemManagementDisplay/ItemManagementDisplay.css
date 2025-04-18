@@ -12,14 +12,23 @@
   width: 100px; /* Adjust width as needed */
 }
 
-.add-item-btn {
-  background: none;
-  border: 1px solid black;
-  font-size: 16px;
-  cursor: pointer;
-  display: block;
+td.actions .add-item-btn {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  position: absolute;
+  margin-top: -80px;
+  background-color: transparent;
 }
-
+td.actions .add-item-btn i.bi.bi-plus-circle {
+  font-size: 50px;
+}
+td .actions .add-item-btn span.text-add {
+  font-weight: 600;
+}
+td.actions {
+  width: auto !important;
+}
 .table-container {
   flex: 1;
   overflow-x: auto;
@@ -35,7 +44,7 @@
   border: 2px solid black;
   padding: 8px;
   vertical-align: middle;
-  background-color: #d9d9d9;
+  background-color: #e5cf87;
 }
 .item-table td {
   border: 2px solid black;
@@ -59,16 +68,33 @@ label.upload-btn:active {
   font-weight: 600;
 }
 
-.edit-btn,
+td.actions button.edit-btn {
+  background-color: #d9d9d9 !important;
+  color: black;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+td.actions button.edit-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-decoration: underline;
+}
+
 .delete-btn,
 .save-btn {
   display: inline-flex;
   justify-content: center;
-
   padding: 5px 10px;
   border: none;
   cursor: pointer;
   background-color: #d9d9d9;
+  transition: all 0.2s ease-in-out;
+}
+.delete-btn:hover,
+.save-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .actions {
@@ -210,4 +236,17 @@ td.tdprice {
 }
 td.tdphoto {
   width: 200px;
+}
+@media screen and (max-width: 480px) {
+  .table-container {
+    width: 100%;
+    margin-bottom: 150px;
+  }
+  .add-item-btn {
+    width: 100%;
+    position: absolute;
+    bottom: auto;
+    left: 0;
+    transform: translate(-0%, 140%);
+  }
 }

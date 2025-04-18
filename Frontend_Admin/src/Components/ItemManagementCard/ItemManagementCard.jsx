@@ -11,12 +11,13 @@ const ItemManagementCard = ({
   const [isEditing, setIsEditing] = useState(false);
   const [editedItem, setEditedItem] = useState({ ...item });
 
-  // Debug logs to check if props are received
-  console.log("onSave prop:", onSave);
-  console.log("onDelete prop:", onDelete);
-
   const handleChange = (e) => {
     setEditedItem({ ...editedItem, [e.target.name]: e.target.value });
+  };
+
+  const handleOptionsChange = (e) => {
+    const options = e.target.value.split(",").map((opt) => opt.trim());
+    setEditedItem({ ...editedItem, options });
   };
 
   const handleFileChange = (e) => {
@@ -32,9 +33,8 @@ const ItemManagementCard = ({
       alert("Please fill in all fields before saving.");
       return;
     }
-    console.log("Saving item:", editedItem); // Debug log
-    onSave(editedItem); // Update item in parent state
-    setIsEditing(false); // Exit editing mode
+    onSave(editedItem);
+    setIsEditing(false);
   };
 
   return (
@@ -76,6 +76,21 @@ const ItemManagementCard = ({
           </label>
         )}
       </td>
+      <td className="tdoptions">
+        {isEditing ? (
+          <input
+            type="text"
+            name="options"
+            value={editedItem.options.join(", ")}
+            onChange={handleOptionsChange}
+            placeholder="Enter options (comma-separated)"
+          />
+        ) : editedItem.options.length > 0 ? (
+          editedItem.options.join(", ")
+        ) : (
+          "No options"
+        )}
+      </td>
       <td className="actions">
         {isEditing ? (
           <button className="save-btn" onClick={handleSave}>
@@ -94,7 +109,7 @@ const ItemManagementCard = ({
       </td>
       <td className="actions" style={{ border: "none" }}>
         {showAddButton ? (
-          <button className="add-category-btn" onClick={onAdd}>
+          <button className="add-item-btn" onClick={onAdd}>
             <i className="bi bi-plus-circle" />
             <span className="text-add">Add New Item</span>
           </button>

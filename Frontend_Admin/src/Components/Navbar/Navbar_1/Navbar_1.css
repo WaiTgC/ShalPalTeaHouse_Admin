@@ -1,5 +1,5 @@
 .nav1_container {
-  background-color: #bfbfbf;
+  background-color: #fcda6b;
   border-bottom: 2px solid black;
   padding: 0px 0px;
   cursor: pointer;
@@ -7,6 +7,7 @@
   outline: none;
   overflow: hidden;
 }
+
 .navbar1 {
   padding: 0px 0px;
 }
@@ -48,10 +49,10 @@
   align-items: center;
 }
 .nav1-link.active {
-  background-color: #7f7f7f; /* Darker red for active state */
+  background-color: #e5cf87; /* Darker red for active state */
 }
 .nav1-item:hover {
-  background-color: #7f7f7f; /* Lighter red on hover */
+  background-color: #e5cf87; /* Lighter red on hover */
 }
 @media (max-width: 768px) {
   .nav1-item {

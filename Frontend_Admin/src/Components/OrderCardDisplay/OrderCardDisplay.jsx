@@ -10,18 +10,16 @@ const OrderCardDisplay = () => {
   const { orders, updateOrderStatus, cancelOrder, removeOrderItem, tableNo } =
     useOrderContext();
   const [selectedTableOrder, setSelectedTableOrder] = useState(null);
-  const [filterTable, setFilterTable] = useState("All"); // State for table filter
+  const [filterTable, setFilterTable] = useState("All");
 
   console.log("Current orders in OrderCardDisplay:", orders);
 
-  // Sort orders: "New" first, then "In Process"
   const sortedOrders = [...orders].sort((a, b) => {
     if (a.status === "New" && b.status === "In Process") return -1;
     if (a.status === "In Process" && b.status === "New") return 1;
     return 0;
   });
 
-  // Filter orders based on selected table
   const filteredOrders = sortedOrders.filter((order) => {
     if (filterTable === "All") return true;
     return order.tableNo === filterTable;
@@ -171,7 +169,7 @@ const OrderCardDisplay = () => {
             {selectedTableOrder.status === "In Process" ? (
               <>
                 <p>All orders for this table are now being processed.</p>
-                <table className="table table-striped">
+                <table className="table">
                   <thead>
                     <tr>
                       <th>Items</th>
@@ -207,13 +205,12 @@ const OrderCardDisplay = () => {
                     </tr>
                   </tfoot>
                 </table>
-                <div className="modal-buttons">
-                  <button
-                    className="modal-btn cancel-btn"
-                    onClick={handleCancelOrder}
-                  >
-                    Checkout
-                  </button>
+                {/* Notes Section */}
+                <div className="order-notes-section">
+                  <span className="notes-label">Notes:</span>
+                  <span className="notes-content">
+                    {selectedTableOrder.notes || "No additional notes"}
+                  </span>
                 </div>
               </>
             ) : (
@@ -267,6 +264,13 @@ const OrderCardDisplay = () => {
                     </tr>
                   </tfoot>
                 </table>
+                {/* Notes Section */}
+                <div className="order-notes-section">
+                  <span className="notes-label">Notes:</span>
+                  <span className="notes-content">
+                    {selectedTableOrder.notes || "No additional notes"}
+                  </span>
+                </div>
                 <div className="modal-buttons">
                   {isEditing ? (
                     <button

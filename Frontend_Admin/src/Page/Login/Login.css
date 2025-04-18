@@ -1,51 +1,87 @@
 /* src/components/Login.css */
+.login-page {
+  height: 100vh;
+  background-color: #c5ab58;
+  position: relative;
+}
 .login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .login-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .login-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .error {
-    color: red;
-    text-align: center;
-    margin-bottom: 10px;
-  }
+  position: absolute;
+  max-width: 532px;
+  width: 100%;
+  height: 366px auto;
+  margin: 10px auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login-button {
+  width: 158px;
+  height: 50px;
+  background-color: transparent;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid grey;
+  z-index: 200;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.login-button:hover {
+  background-color: #cf9c1d;
+}
+.login-button:active {
+  background-color: #f3b315;
+  color: white;
+  border: none;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.footer-image {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+img.footer-image-1,
+img.footer-image-2 {
+  width: 536px;
+  height: 465px;
+}

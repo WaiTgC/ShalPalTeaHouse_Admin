@@ -1,20 +1,15 @@
 .nav2_container {
+  background-color: #fcda6b;
+  border-bottom: 2px solid black;
   padding: 0px 0px;
-  margin: 0px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  overflow: hidden;
 }
 
 .navbar2 {
-  background-color: #bfbfbf;
-  border-bottom: 2px solid black;
   padding: 0px 0px;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap;
-  width: 100%;
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
-  cursor: pointer;
-  user-select: none; /* Prevents text selection */
-  outline: none;
 }
 /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
 .navnar2::-webkit-scrollbar {

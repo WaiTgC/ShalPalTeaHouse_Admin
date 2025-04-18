@@ -3,11 +3,7 @@ import "./EmployeeManagement.css";
 import EmployeeManagementDisplay from "../EmployeeManagementDisplay/EmployeeManagementDisplay";
 
 const EmployeeManagement = () => {
-  return (
-    <div className="employee-management-content">
-      <EmployeeManagementDisplay />
-    </div>
-  );
+  return <EmployeeManagementDisplay />;
 };
 
 export default EmployeeManagement;

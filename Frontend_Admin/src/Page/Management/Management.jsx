@@ -7,16 +7,14 @@ import CategoryManagement from "../../Components/CategoryManagement/CategoryMana
 
 const Management = () => {
   return (
-    <div>
-      <Layout_3>
-        <Routes>
-          <Route path="/" element={<ItemManagement />} />
-          <Route path="TableManagement" element={<TableManagement />} />
-          <Route path="ItemManagement" element={<ItemManagement />} />
-          <Route path="CategoryManagement" element={<CategoryManagement />} />
-        </Routes>
-      </Layout_3>
-    </div>
+    <Layout_3>
+      <Routes>
+        <Route path="/" element={<ItemManagement />} />
+        <Route path="TableManagement" element={<TableManagement />} />
+        <Route path="ItemManagement" element={<ItemManagement />} />
+        <Route path="CategoryManagement" element={<CategoryManagement />} />
+      </Routes>
+    </Layout_3>
   );
 };
 

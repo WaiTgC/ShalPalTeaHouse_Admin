@@ -3,9 +3,9 @@ import Layout_4 from "../../Layout/Layout_4/Layout_4";
 import { Routes, Route, useLocation } from "react-router-dom";
 import UserRole from "../../Components/UserRole/UserRole";
 import EmployeeManagement from "../../Components/EmployeeManagement/EmployeeManagement;";
-import TaxConfiguration from "../../Components/Tax Configuration/TaxConfig";
-import PaymentSetting from "../../Components/PaymentSetting/PaymentSetting";
 import SalesReport from "../../Components/SalesReport/SalesReport";
+import PaymentTaxSetting from "../../Components/PaymentTaxSetting/PaymentTaxSetting";
+import "./BackOffice.css";
 
 const BackOffice = () => {
   const location = useLocation();
@@ -16,8 +16,7 @@ const BackOffice = () => {
         <Route path="/" element={<UserRole />} />
         <Route path="UserRole" element={<UserRole />} />
         <Route path="EmployeeManagement" element={<EmployeeManagement />} />
-        <Route path="TaxConfiguration" element={<TaxConfiguration />} />
-        <Route path="PaymentSetting" element={<PaymentSetting />} />
+        <Route path="PaymentTaxSetting" element={<PaymentTaxSetting />} />
         <Route path="SalesReport" element={<SalesReport />} />
       </Routes>
     </Layout_4>

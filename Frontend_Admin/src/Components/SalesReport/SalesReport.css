@@ -1,0 +1,233 @@
+/* Container using card style */
+.sales-report-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Increased gap between sections */
+}
+
+.sales-report-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+/* Use .card for consistent section styling */
+.card {
+  width: auto;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px; /* Spacing between cards if multiple are used */
+}
+
+/* Shared section styling (applied to inner divs now) */
+.filters-section,
+.summary-section,
+.graphs-section,
+.most-sold-items-section,
+.sales-table-section {
+  /* No background/padding/shadow here, inherited from parent .card */
+}
+
+.filters-section h3,
+.summary-section h3,
+.graphs-section h3,
+.most-sold-items-section h3,
+.sales-table-section h3 {
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+/* Filters Section */
+.filters-section {
+  width: 20%;
+}
+.filters-section .filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-group label {
+  font-weight: bold;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.filter-group input[type="date"],
+.filter-group select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95em;
+  min-width: 150px;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.clear-filters-button {
+  padding: 9px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+  margin-left: auto;
+}
+
+.clear-filters-button:hover {
+  background-color: #5a6268;
+}
+
+/* Summary Section */
+.summary-section .summary-details {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 1.1em;
+  text-align: center; /* Center summary items */
+}
+
+.summary-details p {
+  margin: 5px 0;
+  color: #444;
+  background-color: #f8f9fa; /* Light background for each summary item */
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.summary-details strong {
+  color: #0056b3;
+  display: block; /* Make label and value stack */
+  margin-bottom: 3px;
+  font-size: 0.9em;
+}
+
+/* Graphs Section */
+.graphs-section .charts-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Responsive columns */
+  gap: 30px; /* Space between charts */
+  margin-top: 10px;
+}
+
+.chart-wrapper {
+  position: relative;
+  /* min-height: 300px; */ /* Ensure charts have some height */
+  height: 350px; /* Fixed height for consistency */
+  background-color: #fdfdfd;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  display: flex; /* Center no-data message */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Most Sold Items & Sales Table Section */
+.most-sold-items-section .table-wrapper,
+.sales-table-section .table-wrapper {
+  overflow-x: auto; /* Allow horizontal scrolling on small screens */
+  height: auto; /* Limit table height and make scrollable */
+}
+
+.items-table,
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.items-table th,
+.items-table td,
+.sales-table th,
+.sales-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 0.95em;
+  white-space: nowrap;
+}
+
+.items-table th,
+.sales-table th {
+  background-color: #e9ecef;
+  color: #333;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.items-table tbody tr:nth-child(even),
+.sales-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.items-table tbody tr:hover,
+.sales-table tbody tr:hover {
+  background-color: #e2e6ea;
+}
+
+/* Specific Alignments */
+.items-table th:first-child, /* Rank */
+.items-table td:first-child,
+.items-table th:last-child, /* Quantity */
+.items-table td:last-child {
+  text-align: center;
+  width: 80px; /* Fixed width for rank/quantity */
+}
+
+.sales-table td:last-child, /* Amount */
+.sales-table th:last-child {
+  text-align: right;
+}
+/* Removed centering for items sold count as it's removed from table */
+/* .sales-table td:nth-child(4),
+.sales-table th:nth-child(4) {
+  text-align: center;
+} */
+
+.sales-table tfoot {
+  background-color: #e9ecef;
+  font-weight: bold;
+  color: #333;
+}
+
+.sales-table tfoot td {
+  border-top: 2px solid #ccc;
+}
+
+.no-data-message {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  padding: 20px;
+  width: 100%; /* Ensure it takes full width in flex container */
+}

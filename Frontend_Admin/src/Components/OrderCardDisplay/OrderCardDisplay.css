@@ -1,21 +1,24 @@
 .order-display {
   padding: 20px;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   cursor: pointer;
   outline: none;
   user-select: none;
+  font-family: "Poppins", sans-serif;
 }
 .order-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  padding: 0px 60px;
 }
 
 .order-header h2 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin: 0px;
   color: #333;
   overflow-y: hidden;
 }
@@ -40,7 +43,7 @@
 
 .order-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
+
   gap: 20px;
 }
 
@@ -62,19 +65,19 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .modal-box {
   background: #fff;
-
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 500px; /* Wider to fit table */
-  max-height: 80vh auto;
-  overflow-y: auto;
-  position: relative;
-  margin-top: 100px;
+  box-shadow: 0 4px 10px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 551px;
+  height: auto;
   overflow-y: hidden;
+  position: absolute;
+  top: 80px;
   cursor: pointer;
   user-select: none;
   outline: none;
@@ -86,15 +89,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px 0px 20px !important;
+  width: 100%;
+  height: 49px;
+  background-color: #e5cf87;
 }
 
 .modal-box h3 {
+  font-family: "poppins", sans-serif;
   overflow-y: hidden;
   font-size: 16px;
   font-weight: 600;
   color: #333;
-  margin: 0;
+  margin-left: 30px;
+  margin-bottom: 0px;
 }
 .modal-box i {
   font-size: 25px !important;
@@ -120,7 +127,7 @@
 
 .modal-btn {
   padding: 10px 20px !important;
-  border: 1px solid black !important;
+  border: none !important;
   border-radius: 4px;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
@@ -133,17 +140,25 @@
   border-collapse: collapse;
   font-family: "Poppins", sans-serif;
 }
-
+.table thead tr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.table tfoot tr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
 .table th {
-  border: 1px solid black;
+  background-color: white !important;
+  border: none !important;
   padding: 8px;
   vertical-align: middle;
-  background-color: #d9d9d9;
+
   text-align: center;
 }
 .table td {
   text-align: left;
-  border: 1px solid black;
+  border: none !important;
   padding: 20px !important;
   vertical-align: middle;
   font-weight: 500;
@@ -159,30 +174,33 @@ td.index-item {
 }
 
 .cancel-btn {
-  background-color: #d9d9d9;
+  background-color: #eedfaf;
   color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .cancel-btn:hover {
-  background-color: #666;
+  background-color: #d0c292;
 }
 
 .send-btn {
-  background-color: #d9d9d9;
+  background-color: #eedfaf;
   color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .send-btn:hover {
-  background-color: #666;
+  background-color: #d0c292;
 }
 
 .edit-btn {
-  background-color: #d9d9d9;
+  background-color: #eedfaf !important;
   color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .edit-btn:hover {
-  background-color: #666;
+  background-color: #d0c292;
 }
 
 i.bi.bi-x.delete-item::before {
@@ -190,4 +208,33 @@ i.bi.bi-x.delete-item::before {
   border: 1px dashed black;
   margin-right: 10px;
   padding: 5px;
+}
+.order-notes-section {
+  margin: 10px;
+  display: flex;
+  align-items: top;
+  gap: 10px; /* Space between label and content */
+}
+
+.notes-label {
+  font-family: "M Plus 1p", sans-serif;
+  padding: 8px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap; /* Prevent label from wrapping */
+}
+
+.notes-content {
+  flex: 1; /* Take up remaining space */
+  background-color: #fff; /* White background */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+  max-width: 435px;
+  height: 83px;
+  display: flex;
+  align-items: top;
+  white-space: pre-wrap; /* Preserve line breaks */
 }

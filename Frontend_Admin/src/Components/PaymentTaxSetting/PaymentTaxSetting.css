@@ -1,0 +1,359 @@
+/* Styles specific to the combined PaymentTaxSetting component */
+.payment-tax-setting-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Space between sections */
+}
+
+.payment-tax-setting-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Styles for individual setting sections (Payment, Tax, Discount) */
+.settings-section {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space elements within a section */
+}
+
+.settings-section h2 {
+  color: #555;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* List styles */
+.settings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #fdfdfd;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.settings-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.settings-list-item span {
+  flex-grow: 1;
+  margin-right: 10px;
+  color: #333;
+}
+
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between controls */
+}
+
+/* Button Styles */
+.add-button,
+.edit-button,
+.delete-button,
+.confirm-button,
+.cancel-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-button {
+  background-color: #28a745; /* Green */
+  color: white;
+  align-self: flex-start; /* Align button to the left */
+}
+
+.add-button:hover {
+  background-color: #218838;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+  background-color: #ffc107; /* Yellow */
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red */
+  color: white;
+  font-size: 1.1em; /* Make icon slightly larger */
+  padding: 6px 10px; /* Adjust padding for icon */
+  line-height: 1; /* Ensure icon is centered vertically */
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-button {
+  background-color: #007bff; /* Blue */
+  color: white;
+}
+.confirm-button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  background-color: #6c757d; /* Gray */
+  color: white;
+}
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+/* Payment specific item */
+.payment-item .item-controls {
+  gap: 15px; /* Slightly more space for switch + delete */
+}
+
+/* Form Styles (within Modal) */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.error-message {
+  color: #dc3545; /* Red */
+  font-size: 0.9em;
+  margin-top: -10px; /* Reduce space above error */
+  margin-bottom: 5px;
+}
+
+/* --- Inlined Switch Styles --- */
+.inline-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+.inline-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 45px;
+  height: 24px;
+  background: grey;
+  border-radius: 100px;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.inline-switch-label .inline-switch-button {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 45px;
+  transition: 0.2s;
+  background: #fff;
+  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
+
+.inline-switch-checkbox:checked + .inline-switch-label .inline-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.inline-switch-label:active .inline-switch-button {
+  width: 25px;
+}
+
+/* --- Inlined Modal Styles --- */
+.inline-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.inline-modal-content {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  min-width: 300px;
+  width: auto;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.inline-modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+.inline-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.inline-modal-close-button:hover {
+  color: #333;
+}
+/* Existing styles remain unchanged, append these new styles */
+
+/* Image Upload Styles */
+.image-upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.image-upload-label {
+  cursor: pointer;
+}
+
+.image-upload-placeholder {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.image-preview-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-preview {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.remove-image-button {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.remove-image-button:hover {
+  background-color: #c82333;
+}
+
+/* Adjust item-controls for additional button */
+.payment-item .item-controls {
+  gap: 10px; /* Adjusted to fit Edit button */
+}
+
+/* Subsection styles */
+.subsection {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fafafa;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.subsection h3 {
+  color: #444;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}

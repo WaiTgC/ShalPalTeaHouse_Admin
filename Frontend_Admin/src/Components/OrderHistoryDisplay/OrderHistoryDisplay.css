@@ -1,25 +1,25 @@
 .order-history-display {
   padding: 20px;
-  max-width: 1350px;
+  max-width: 1440px;
   margin: 0 auto;
-  user-select: none;
-  outline: none;
   cursor: pointer;
+  outline: none;
+  user-select: none;
+  font-family: "Poppins", sans-serif;
 }
 
 .order-history-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  cursor: pointer;
-  outline: none;
-  user-select: none;
+  padding: 0px 60px;
 }
 
 .order-history-header h2 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin: 0px;
   color: #333;
   overflow-y: hidden;
 }
@@ -47,7 +47,7 @@
 
 .order-history-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
+
   gap: 20px;
 }
 
@@ -74,12 +74,13 @@
 .viewhistory-box {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 500px;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  margin-top: 100px;
+  box-shadow: 0 4px 10px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 551px;
+  height: auto;
+  overflow-y: hidden;
+  position: absolute;
+  top: 250px;
   cursor: pointer;
   user-select: none;
   outline: none;
@@ -87,18 +88,23 @@
 }
 
 .viewhistory-header {
+  overflow-y: hidden;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px 0px 20px !important;
+  width: 100%;
+  height: 49px;
+  background-color: #e5cf87;
 }
 
 .viewhistory-box h3 {
+  font-family: "poppins", sans-serif;
+  overflow-y: hidden;
   font-size: 16px;
   font-weight: 600;
   color: #333;
-  margin: 0;
-  overflow-y: hidden;
+  margin-left: 30px;
+  margin-bottom: 0px;
 }
 
 .viewhistory-box i {
@@ -117,14 +123,15 @@
 
 .viewhistory-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin-top: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .viewhistory-btn {
   padding: 10px 20px !important;
-  border: 1px solid black !important;
+  border: none !important;
   border-radius: 4px;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
@@ -133,39 +140,47 @@
   transition: background-color 0.3s ease;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: "Poppins", sans-serif;
+.table thead tr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
-
+.table tfoot tr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
 .table th {
-  border: 1px solid black;
+  background-color: white !important;
+  border: none !important;
   padding: 8px;
   vertical-align: middle;
-  background-color: #d9d9d9;
+
   text-align: center;
 }
-
 .table td {
   text-align: left;
-  border: 1px solid black;
+  border: none !important;
   padding: 20px !important;
   vertical-align: middle;
   font-weight: 500;
 }
 
+td.index-item {
+  border: collapse !important;
+  border-bottom: none;
+  border-top: none;
+}
 .table tfoot td {
   padding: 8px !important;
 }
-
-.view-btn {
-  background-color: #d9d9d9;
+.viewhistory-btn.view-btn {
+  height: auto;
+  background-color: #eedfaf;
   color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .view-btn:hover {
-  background-color: #666;
+  background-color: #d0c292;
 }
 
 .input-group {
@@ -246,4 +261,50 @@
 
 .calendar-date.active:hover {
   background: #ddd;
+}
+
+/* Existing styles remain unchanged, append these */
+
+.date-filter .date-input {
+  padding: 5px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Adjust the calendar icon and input alignment if needed */
+.date-filter {
+  gap: 10px;
+}
+.date-input.form-control {
+  transform: scale(0.9) translate(-50px);
+  margin: 0px auto;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .order-history-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .order-history-header h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+  }
+  .table-filter {
+    gap: 5px;
+  }
+  .table-filter span {
+    display: none;
+    font-size: 14px;
+    white-space: nowrap;
+  }
 }

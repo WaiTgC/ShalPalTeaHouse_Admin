@@ -29,24 +29,15 @@ const Navbar_2 = () => {
           </li>
           <li className="nav2-item">
             <NavLink
-              to="/BackOffice/TaxConfiguration"
+              to="/BackOffice/PaymentTaxSetting"
               className={({ isActive }) =>
                 isActive ? "nav2-link active" : "nav2-link"
               }
             >
-              Tax Configuration
+              Payment & Tax Setting
             </NavLink>
           </li>
-          <li className="nav2-item">
-            <NavLink
-              to="/BackOffice/PaymentSetting"
-              className={({ isActive }) =>
-                isActive ? "nav2-link active" : "nav2-link"
-              }
-            >
-              PaymentSetting
-            </NavLink>
-          </li>
+
           <li className="nav2-item">
             <NavLink
               to="/BackOffice/SalesReport"

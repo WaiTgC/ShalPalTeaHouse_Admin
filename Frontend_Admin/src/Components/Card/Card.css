@@ -1,14 +1,11 @@
 .card {
+  margin: 0 auto;
   border: 2px solid #ccc !important;
-  border-radius: 4px;
-  background-color: #e0e0e0; /* Light gray background */
   padding: 10px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 230px; /* Fixed width */
-  height: 230px; /* Fixed height */
-  display: flex;
-  flex-direction: column;
+  min-height: 280px;
   justify-content: space-between;
   align-items: center;
   cursor: pointer; /* Indicates clickability */
@@ -16,10 +13,10 @@
   outline: none;
   transition: transform 0.1s ease, box-shadow 0.1s ease,
     background-color 0.1s ease; /* Smooth transition */
+  overflow: hidden;
+  background-color: #e7e4dc !important;
 }
-.card.selected {
-  border: 2px solid #5cb85c; /* Green border when clicked */
-}
+
 .click-count {
   position: absolute;
   top: 5px;
@@ -60,32 +57,58 @@
   left: 0px;
 }
 
-.meat-selection {
+.options-container {
+  margin: 0 auto;
+  max-width: 230px;
   margin-top: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc !important;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease,
+    background-color 0.1s ease; /* Smooth transition */
+}
+.options-container:active {
+  transform: scale(0.95); /* Slightly shrink the card */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Reduce shadow for "pressed" effect */
+  background-color: #d0d0d0; /* Darker gray when pressed */
+}
+.option-selection {
+  padding: 2px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.meat-selection span {
+.option-selection span {
   font-size: 14px;
   font-weight: 500;
 }
 
-.meat-selection label {
+.option-selection label {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
   font-size: 14px;
+  font-weight: 500;
+  margin: 0px;
 }
 
-.meat-selection input[type="checkbox"] {
+.option-selection input {
   margin: 0;
+  padding: 0;
+  width: 20px;
 }
 
 /* Active state when clicked */
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly larger shadow */
+}
 .card:active {
   transform: scale(0.95); /* Slightly shrink the card */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Reduce shadow for "pressed" effect */
@@ -95,7 +118,7 @@
 .card-image {
   width: 120px; /* Larger circle to match the image */
   height: 120px;
-  background-color: #757575;
+  background-color: #e2cc85;
   border-radius: 50%;
   margin: 20px 0;
 }
@@ -125,7 +148,7 @@
   font-weight: 600;
   margin: 0;
   white-space: nowrap;
-  padding: 10px;
+  padding: 15px;
 }
 @media screen and (max-width: 885px) {
   .card {

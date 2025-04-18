@@ -1,5 +1,7 @@
 .employee-management-container {
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   width: 100%;
   margin-top: 30px;
@@ -9,12 +11,22 @@
   outline: none;
 }
 
+.add-employee-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 160px;
+  min-height: 100px;
+  margin: 0 auto;
+  margin-top: 10px;
+  gap: 20px;
+}
+
 button.add-employee-btn {
   display: flex;
   flex-direction: column;
   border: none;
-  position: absolute;
-  margin-top: -80px;
   background-color: transparent;
 }
 
@@ -24,16 +36,19 @@ i.bi.bi-plus-circle {
 
 span.text-add {
   font-weight: 600;
+  text-decoration: underline;
 }
 
 td.actions {
   width: 170px !important;
 }
 
-.table-container {
+.employee-management-container .table-container {
+  margin: 0px;
   flex: 1;
   overflow-x: auto;
   text-align: center;
+  width: 100%;
 }
 
 .employee-table {
@@ -46,26 +61,43 @@ td.actions {
   padding: 8px;
   vertical-align: middle;
   font-family: "Poppins", sans-serif;
-  background-color: #d9d9d9;
+  background-color: #e5cf87;
 }
 
-.employee-table td {
-  border: 2px solid black;
+.employee-table tbody td {
+  border-right: 2px solid black;
   padding: 8px;
   vertical-align: middle;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
 
-.upload-btn {
-  background-color: white;
-  border: 1px solid black;
-  padding: 5px 10px;
-  margin-right: -100px;
-  cursor: pointer;
+.employee-table tbody {
+  border-bottom: 2px solid black;
+}
+.employee-table tbody span {
+  transition: all 0.2s ease;
+}
+.employee-table tbody span:hover {
+  text-decoration: underline;
+}
+.employee-table tbody td .advanced-details p {
+  font-family: "Poppins", sans-serif;
+}
+.employee-table tbody td .advanced-details p:hover {
+  background-color: #fde189;
 }
 
-.edit-btn,
+td.actions .edit-btn {
+  display: inline-flex;
+  justify-content: center;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent !important;
+  text-decoration: underline;
+}
+
 .delete-btn,
 .save-btn {
   display: inline-flex;
@@ -73,7 +105,7 @@ td.actions {
   padding: 5px 10px;
   border: none;
   cursor: pointer;
-  background-color: #d9d9d9;
+  background-color: #eedfaf;
 }
 
 .actions {
@@ -94,29 +126,66 @@ td.actions {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .alert-box-employee-content {
-  background: white;
-  padding: 20px;
+  background: #fff;
   border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  height: 300px;
-  width: 630px;
-  border: 1px solid black;
-  position: relative;
-  margin-top: 100px;
+  box-shadow: 0 4px 10px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 594px;
+  height: auto;
+  overflow-y: hidden;
+  position: absolute;
+  top: 80px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+}
+
+.alert-box-employee-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 57px;
+  background-color: #fde189;
+}
+
+.alert-box-employee-header i {
+  margin: 5px;
+  font-size: 20px !important;
+  font-weight: 600;
 }
 
 .alert-box-employee-content h3 {
-  margin: 35px 0px;
+  margin: 0px;
   font-size: 18px;
   overflow-y: hidden;
 }
 
+.alert-box-employee-content .input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.alert-box-employee-content .input-group label {
+  width: 88%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
 .alert-box-employee-input {
-  width: 70%;
+  width: 80%;
+  border-radius: 5px !important;
+  min-width: 524px;
+  height: 60px;
   padding: 10px;
   margin-bottom: 15px;
   border: none;
@@ -124,6 +193,10 @@ td.actions {
   box-sizing: border-box;
   outline-color: black;
   background-color: #d9d9d9;
+}
+
+.alert-box-employee-input:focus {
+  outline: #fde189 solid 2px;
 }
 
 .alert-box-employee-buttons {
@@ -147,8 +220,8 @@ td.actions {
   padding: 8px 16px;
 }
 
-.alert-box-employee-buttons button:first-child:hover {
-  background-color: #d9d9d9a7;
+.alert-box-employee-buttons button:first-child:active {
+  outline: #fde189 solid 2px;
 }
 
 .alert-box-employee-buttons button:last-child {
@@ -157,7 +230,7 @@ td.actions {
 }
 
 .alert-box-employee-buttons button:last-child:hover {
-  background-color: #d9d9d9a7;
+  outline: #fde189 solid 2px;
 }
 
 /* Additional styles for EmployeeManagementDisplay */
@@ -171,7 +244,7 @@ td.actions {
 
 .employee-table th,
 .employee-table td {
-  min-width: 120px; /* Ensure columns are wide enough for employee data */
+  min-width: auto;
 }
 
 .employee-table td input {
@@ -181,4 +254,149 @@ td.actions {
   border-radius: 4px;
   background-color: #f0f0f0;
   outline-color: black;
+}
+
+/* Styles for the toggle switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 43px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px solid #4d4d4d;
+  background-color: transparent;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 3px;
+  bottom: 9%;
+  background-color: #4d4d4d;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #eedfaf;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px transparent;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.advancedsettings-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.input-group .gender-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+}
+
+.input-group .gender-options label {
+  margin: 0px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.input-group .gender-options input[type="radio"] {
+  display: none;
+}
+
+.input-group .gender-options .custom-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4d4d4d;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+.input-group .gender-options input[type="radio"]:checked + .custom-radio {
+  background: rgb(233, 255, 79);
+  background: linear-gradient(
+    0deg,
+    rgba(233, 255, 79, 1) 0%,
+    rgba(255, 159, 51, 1) 48%
+  );
+  border: none;
+}
+
+.input-group .image-upload-box {
+  display: flex;
+  justify-content: left;
+  width: 80%;
+}
+
+.input-group .image-placeholder {
+  margin: 0;
+}
+
+.input-group .image-placeholder label {
+  margin: 0px;
+  background-color: #d9d9d9;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-group .image-placeholder label i.bi.bi-plus {
+  font-size: 60px;
+  color: #4d4d4d;
+  cursor: pointer;
+}
+
+.profile-image-preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
 }

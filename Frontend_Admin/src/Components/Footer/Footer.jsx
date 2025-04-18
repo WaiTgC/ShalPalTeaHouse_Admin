@@ -69,7 +69,7 @@ const Footer = () => {
         <div className="alert-overlay-ordered">
           <div className="alert-box-ordered">
             <i onClick={handleCloseAlert} className="bi bi-x-lg"></i>
-            <h3>Orders Created Successfully</h3>
+            <h3>New Order Received</h3>
             <button className="view-order-button" onClick={handleViewOrder}>
               View Order
             </button>

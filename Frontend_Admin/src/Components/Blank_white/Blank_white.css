@@ -1,5 +1,5 @@
 .blank_white {
-  background-color: white;
+  background-color: transparent !important;
   border-bottom: 2px solid black;
   padding: 30px 0;
   cursor: pointer;

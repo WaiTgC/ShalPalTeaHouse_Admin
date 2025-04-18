@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./CheckoutDisplay.css";
 import { tableNo } from "../../assets/assets";
-import { employees } from "../../assets/assets"; // Import employees data
+import { useOrderContext } from "../../Context/OrderProvider"; // Import the context
 import CheckoutCard from "../CheckoutCard/CheckoutCard";
 
 const CheckoutDisplay = () => {
+  const { employeeList } = useOrderContext(); // Access employeeList from context
   const [tableitems, setTableitems] = useState(tableNo);
   const [selectedOrderType, setSelectedOrderType] = useState("Dine-in"); // Default OrderType
   const [selectedStaffName, setSelectedStaffName] = useState(""); // Default StaffName
@@ -12,8 +13,10 @@ const CheckoutDisplay = () => {
   // Define possible order types
   const orderTypes = ["Dine-in", "Takeaway", "Delivery"];
 
-  // Get unique staff names from employees data
-  const staffNames = [...new Set(employees.map((employee) => employee.name))];
+  // Get unique staff names from employeeList
+  const staffNames = [
+    ...new Set(employeeList.map((employee) => employee.name)),
+  ];
 
   return (
     <div className="Checkout-Display">

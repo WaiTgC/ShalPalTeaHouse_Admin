@@ -1,225 +1,287 @@
-/* UserRole.css */
-.UserRole-Content-Container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 40px;
-}
-
-.UserRole-Card {
-  border: 1px solid black;
-  background-color: white;
-  padding: 30px;
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 20px;
-  text-align: center;
+/* Container and Card Styling */
+.user-role-management-container {
+  /* Inherits card styles from SalesReport.css if using the 'card' class */
+  /* Add specific overrides or additions here if needed */
   display: flex;
   flex-direction: column;
-  font-family: "Poppins", sans-serif;
-}
-
-.UserRole-content {
-  border: 2px solid white;
-  padding: 30px;
   width: 100%;
-  max-width: 500px;
-  margin-bottom: 20px;
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  gap: 25px;
-  user-select: none;
-  cursor: pointer;
-  outline: none;
+  gap: 20px;
 }
 
-.role-choose-container {
-  padding: 0px;
-  width: 40%;
-  height: 200px;
-  text-align: center;
-}
-select.form-select {
-  background-color: #d9d9d9;
-  font-weight: 600 !important;
-  border: 1px solid black;
-  user-select: none;
-  cursor: pointer;
-  outline: none;
-}
+.user-role-management-container.card {
+  width: 50%;
 
-.permission-button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  text-align: left;
-}
-
-.permission-button-container h4 {
-  color: black;
-  margin-bottom: 10px;
-  font-weight: 600 !important;
-  text-align: center;
-  font-size: 16px;
+  margin: 0 auto;
   overflow-y: hidden;
-  border: 1px solid black;
-  padding: 10px 30px;
-  background-color: #d9d9d9;
 }
 
+.user-role-management-container h3 {
+  /* Inherits card h3 styles */
+  margin-bottom: 20px; /* More space after title */
+}
+
+.user-role-controls {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Responsive columns */
+  gap: 30px; /* Space between role selection and permissions */
+  align-items: start; /* Align items to the top */
+}
+
+/* Role Selection Group */
+.role-selection-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.role-selection-group label {
+  font-weight: bold;
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: -5px; /* Adjust spacing */
+}
+
+.role-selection-group .form-select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #fff;
+}
+
+.delete-role-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #dc3545; /* Red */
+  color: white;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+  align-self: flex-start; /* Align to the start of the flex container */
+  margin-top: 5px;
+}
+
+.delete-role-button:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.delete-role-button:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Permissions Group */
+.permissions-group {
+  border-left: 2px solid #eee; /* Separator line */
+  padding-left: 30px;
+}
+
+.permissions-group h4 {
+  color: #444;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.permissions-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(120px, 1fr)
+  ); /* Responsive checkboxes */
+  gap: 10px;
+}
+
+/* Form Check (Checkboxes) Styling */
 .form-check {
-  display: flex !important;
-  padding: 0px !important;
+  display: flex;
   align-items: center;
-  gap: 40px !important;
-  flex-direction: row-reverse !important; /* Reverse the order to put checkbox on the right */
+  gap: 8px; /* Space between checkbox and label */
 }
 
 .form-check-input {
-  margin: 0;
-  padding: 10px;
-  border: 3px solid black !important;
-}
-label.form-check-label {
-  width: 160px;
-  padding: 8px 15px;
-  text-align: center !important;
-  font-size: 16px;
-  font-weight: 500;
-  border: 2px solid black;
-  align-items: center;
-  text-align: center;
-}
-
-.Add-Confirm {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  width: 92%;
-  max-width: 600px;
-  text-align: center;
-}
-
-.Add-Confirm button {
-  font-size: 16px;
-  width: 150px;
-}
-button.add-newrole {
-  background-color: transparent;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  white-space: nowrap;
-  user-select: none;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
-}
-button.btn.btn-success {
-  font-weight: 500;
-  background-color: #d9d9d9;
-  border-color: black;
-  color: black;
-  padding: 0px 0px !important;
-  height: 40px;
-  overflow-y: hidden;
-  margin-top: 50px;
+  accent-color: #007bff; /* Color the checkmark */
 }
 
-.btn-primary:hover,
-.btn-success:hover {
-  opacity: 0.9;
+.form-check-label {
+  font-size: 0.95em;
+  color: #333;
+  cursor: pointer;
+  user-select: none; /* Prevent text selection on label click */
 }
-.custom-alert-box-role {
+
+/* Action Buttons */
+.user-role-actions {
+  display: flex;
+  justify-content: space-between; /* Align buttons */
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.add-new-role-button,
+.save-changes-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-new-role-button {
+  background-color: #17a2b8; /* Info blue */
+  color: white;
+}
+
+.add-new-role-button:hover {
+  background-color: #138496;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.save-changes-button {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+
+.save-changes-button:hover:not(:disabled) {
+  background-color: #218838;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.save-changes-button:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Modal Styles (Add Role) - Prefixing with -role to avoid conflicts if other modals exist */
+.modal-overlay-role {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-}
-.alert-box-role {
-  background: white;
+  z-index: 1050; /* Ensure it's above other content */
   padding: 20px;
+}
+
+.modal-content-role {
+  background-color: #fff;
+  padding: 25px 30px;
   border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  height: 300px;
-  width: 630px;
-  border: 1px solid black;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   position: relative;
-  margin-top: 100px;
+  min-width: 350px;
+  max-width: 500px;
+  width: auto;
 }
 
-.alert-box-role h3 {
-  margin: 35px 0px;
-  font-size: 18px;
-  overflow-y: hidden;
+.modal-content-role h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.4em;
+  text-align: center;
 }
 
-.alert-box-input-role {
-  width: 70%;
-  padding: 10px;
-  margin-bottom: 15px;
+.modal-close-button-role {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
   border: none;
+  font-size: 1.8em;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.modal-close-button-role:hover {
+  color: #333;
+}
+
+.form-group-role {
+  margin-bottom: 15px;
+}
+
+.form-group-role label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.form-input-role {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
-  outline-color: black;
-  background-color: #d9d9d9;
+  font-size: 1em;
 }
 
-.alert-box-buttons-role {
+.form-input-role:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.error-message-role {
+  color: #dc3545; /* Red */
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.modal-actions-role {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
 }
 
-.alert-box-buttons-role button {
-  padding: 8px 20px;
+.confirm-button-role,
+.cancel-button-role {
+  padding: 8px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin: 5px;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
 }
 
-.alert-box-buttons-role button:first-child {
-  background-color: #d9d9d9;
-  color: black;
-  padding: 8px 16px;
+.confirm-button-role {
+  background-color: #007bff; /* Blue */
+  color: white;
+}
+.confirm-button-role:hover {
+  background-color: #0056b3;
 }
 
-.alert-box-buttons-role button:first-child:hover {
-  background-color: #d9d9d9a7;
+.cancel-button-role {
+  background-color: #6c757d; /* Gray */
+  color: white;
 }
-
-.alert-box-buttons-role button:last-child {
-  background-color: #d9d9d9;
-  color: black;
-}
-
-.alert-box-buttons-role button:last-child:hover {
-  background-color: #d9d9d9a7;
-}
-
-@media (max-width: 480px) {
-  .UserRole-Card {
-    padding: 0px;
-  }
-  .UserRole-content {
-    padding: 10px;
-    transform: scale(0.8);
-  }
-  .form-check-input {
-    position: absolute;
-    left: 300px;
-  }
-  .permission-button-container {
-    width: 200px;
-  }
+.cancel-button-role:hover {
+  background-color: #5a6268;
 }

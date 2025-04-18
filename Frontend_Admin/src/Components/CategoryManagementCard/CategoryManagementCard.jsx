@@ -1,34 +1,32 @@
 import React, { useState } from "react";
-import "./CategoryManagementCard.css";
+import "./CategoryManagementCard.css"; // Assuming you have a CSS file for styles
 
 const CategoryManagementCard = ({
   index,
-  category, // Changed from 'item' to 'category'
+  category,
   onDelete,
   onSave,
   showAddButton = false,
   onAdd,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedCategory, setEditedCategory] = useState({ ...category }); // Changed from 'editedItem' to 'editedCategory'
+  const [editedCategory, setEditedCategory] = useState({ ...category });
 
-  // Debug logs to check if props are received
   console.log("onSave prop:", onSave);
   console.log("onDelete prop:", onDelete);
 
   const handleChange = (e) => {
-    setEditedCategory({ ...editedCategory, [e.target.name]: e.target.value }); // Updated variable name
+    setEditedCategory({ ...editedCategory, [e.target.name]: e.target.value });
   };
 
   const handleSave = () => {
     if (!editedCategory.category) {
-      // Updated variable name
       alert("Please fill in all fields before saving.");
       return;
     }
-    console.log("Saving category:", editedCategory); // Updated log message
-    onSave(editedCategory); // Update category in parent state
-    setIsEditing(false); // Exit editing mode
+    console.log("Saving category:", editedCategory);
+    onSave(editedCategory);
+    setIsEditing(false);
   };
 
   return (
@@ -39,15 +37,14 @@ const CategoryManagementCard = ({
           <input
             type="text"
             name="category"
-            value={editedCategory.category} // Updated variable name
+            value={editedCategory.category}
             onChange={handleChange}
-            placeholder="Enter Category Name" // Updated placeholder
+            placeholder="Enter Category Name"
           />
         ) : (
-          editedCategory.category // Updated variable name
+          editedCategory.category
         )}
       </td>
-
       <td className="actions">
         {isEditing ? (
           <button className="save-btn" onClick={handleSave}>
@@ -61,7 +58,6 @@ const CategoryManagementCard = ({
       </td>
       <td className="actions">
         <button className="delete-btn" onClick={() => onDelete(category._id)}>
-          {" "}
           Delete
         </button>
       </td>

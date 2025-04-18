@@ -1,5 +1,7 @@
 import logo from "./logo.svg";
 import campchair from "./camp-chair.svg";
+import photo_login_1 from "./photo_login (1).svg";
+import photo_login_2 from "./photo_login (2).svg";
 
 import food_1 from "./food_1.png";
 import food_2 from "./food_2.png";
@@ -16,7 +18,20 @@ import food_12 from "./Food_12.svg";
 import food_13 from "./Food_13.svg";
 import food_14 from "./Food_14.svg";
 
-import food_15 from "./image-1.svg";
+import food_15 from "./Food_15.svg";
+
+import food_16 from "./Food_16.svg";
+import food_17 from "./Food_17.svg";
+import food_18 from "./Food_18.svg";
+import food_19 from "./Food_19.svg";
+import food_20 from "./Food_20.svg";
+
+import food_21 from "./Food_21.svg";
+import food_22 from "./Food_22.svg";
+import food_23 from "./Food_23.svg";
+import food_24 from "./Food_24.svg";
+import food_25 from "./Food_25.svg";
+import food_26 from "./Food_26.svg";
 
 import drink_1 from "./drink_(1).svg";
 import drink_2 from "./drink_(2).svg";
@@ -34,37 +49,76 @@ import set_C from "./set c 1.svg";
 export const assets = {
   campchair,
   logo,
+  photo_login_1,
+  photo_login_2,
 };
 export const employees = [
   {
     _id: "1",
     name: "Aung Aung",
-    Role: "Manager",
-    Section: "Afternoon",
-    Phone: "09-12345678",
+    employeeId: "EMP001", // Added employeeId
+    position: "Manager",
+    shift: "Afternoon",
+    email: "AA@gmail.com",
+    phone: "09-12345678",
+    pinCode: "11111", // Added pinCode
+    status: "On",
+    startDate: "2022-03-15", // Added advanced setting
+    dateOfBirth: "1985-07-20", // Added advanced setting
+    idCardNumber: "ID001", // Added advanced setting
+    gender: "Male", // Added advanced setting
+    profileImage: null, // Added advanced setting (null for no image initially)
   },
   {
     _id: "2",
     name: "Maung Maung",
-    Role: "Chef",
-    Section: "Afternoon",
-    Phone: "08-12345678",
+    employeeId: "EMP002",
+    position: "Chef",
+    shift: "Afternoon",
+    email: "MM@gmail.com",
+    phone: "08-12345678",
+    pinCode: "22222",
+    status: "On",
+    startDate: "2021-11-10",
+    dateOfBirth: "1990-02-14",
+    idCardNumber: "ID002",
+    gender: "Male",
+    profileImage: null,
   },
   {
     _id: "3",
     name: "Naung Naung",
-    Role: "Waiter",
-    Section: "Afternoon",
-    Phone: "09-12445678",
+    employeeId: "EMP003",
+    position: "Waiter",
+    shift: "Afternoon",
+    email: "NN@gmail.com",
+    phone: "09-12445678",
+    pinCode: "33333",
+    status: "Off",
+    startDate: "2023-06-01",
+    dateOfBirth: "1995-09-25",
+    idCardNumber: "ID003",
+    gender: "Male",
+    profileImage: null,
   },
   {
     _id: "4",
-    name: "Kaung Kaung ",
-    Role: "Owner",
-    Section: "Afternoon",
-    Phone: "09-22345678",
+    name: "Kaung Kaung",
+    employeeId: "EMP004",
+    position: "Owner",
+    shift: "Afternoon",
+    email: "KK@gmail.com",
+    phone: "09-22345678",
+    pinCode: "44444",
+    status: "On",
+    startDate: "2020-01-01",
+    dateOfBirth: "1980-12-30",
+    idCardNumber: "ID004",
+    gender: "Male",
+    profileImage: null,
   },
 ];
+
 export const tableNo = [
   { id: 1, name: "A1", image: null },
   { id: 2, name: "A2", image: null },
@@ -81,9 +135,10 @@ export const menuItems = [
     _id: "1",
     name: "Anyar Rice Salad",
     image: food_1,
-    price: " 65 B",
+    price: "65 B",
     description: "Burmese Traditional Salad",
     category: "Popular Picks",
+    options: ["Fried Egg"],
   },
   {
     _id: "2",
@@ -92,6 +147,7 @@ export const menuItems = [
     price: "70 B",
     description: "Burmese Traditional Salad",
     category: "Popular Picks",
+    options: [],
   },
   {
     _id: "3",
@@ -100,6 +156,7 @@ export const menuItems = [
     price: "70 B",
     description: "Burmese Traditional Salad",
     category: "Popular Picks",
+    options: [],
   },
   {
     _id: "4",
@@ -108,6 +165,7 @@ export const menuItems = [
     price: "70 B",
     description: "Burmese Traditional Salad",
     category: "Popular Picks",
+    options: [],
   },
   {
     _id: "5",
@@ -116,7 +174,10 @@ export const menuItems = [
     price: "70 B",
     description: "Burmese Traditional Salad",
     category: "Popular Picks",
+    options: [],
   },
+
+  // Burmese Specials
   {
     _id: "6",
     name: "Mohinga",
@@ -124,6 +185,7 @@ export const menuItems = [
     price: "50 B",
     description: "Burmese Traditional Soup",
     category: "Burmese Specials",
+    options: ["Fried beans", "Egg", "Coriander"],
   },
   {
     _id: "7",
@@ -132,30 +194,34 @@ export const menuItems = [
     price: "50 B",
     description: "Rakhine Rice Noodle Soup",
     category: "Burmese Specials",
+    options: [],
   },
   {
     _id: "8",
-    name: " Fried Vermicelli",
+    name: "Fried Vermicelli",
     image: food_8,
     price: "50 B",
     description: "Burmese Traditional Salad",
-    category: "Buremse Specials",
+    category: "Burmese Specials",
+    options: ["Chicken", "Pork", "Seafood"],
   },
   {
     _id: "9",
-    name: "Glutionous Rice",
+    name: "Glutinous Rice",
     image: food_9,
     price: "50 B",
     description: "Rice with oil and salt",
-    category: " Burmese Specials",
+    category: "Burmese Specials",
+    options: ["Fried Egg"],
   },
   {
     _id: "10",
     name: "Tea Leaf Rice",
     image: food_10,
     price: "50 B",
-    description: "Burmese  Tea Leaf Rice",
+    description: "Burmese Tea Leaf Rice",
     category: "Burmese Specials",
+    options: [],
   },
   {
     _id: "11",
@@ -163,23 +229,26 @@ export const menuItems = [
     image: food_11,
     price: "50 B",
     description: "Burmese Traditional Salad",
-    category: " Burmese Specials",
+    category: "Burmese Specials",
+    options: [],
   },
   {
     _id: "12",
-    name: "Spicy Fried Chicken",
+    name: "Spicy Fried Rice",
     image: food_12,
     price: "50 B",
     description: "Burmese Traditional Salad",
     category: "Burmese Specials",
+    options: ["Fried Egg"],
   },
   {
     _id: "13",
-    name: " Fish Paste Fried Rice",
+    name: "Fish Paste Fried Rice",
     image: food_13,
     price: "50 B",
     description: "Burmese Traditional Salad",
     category: "Burmese Specials",
+    options: ["Fried Egg"],
   },
   {
     _id: "14",
@@ -188,101 +257,223 @@ export const menuItems = [
     price: "50 B",
     description: "Burmese Traditional Salad",
     category: "Burmese Specials",
+    options: ["Chicken", "Pork", "Seafood"],
   },
+
+  // Burmese Salads
   {
     _id: "15",
-    name: "Rakhine  Noodle Soup",
-    image: food_15,
+    name: "Normal Rice Noodle Salad",
+    image: food_16,
     price: "50 B",
-    description: "Rakhine Traditional Soup",
-    category: "Today's Specials",
+    description: "Burmese Traditional Salad",
+    category: "Burmese Salads",
+    options: ["Fried Beans", "Nga Phel"],
   },
   {
     _id: "16",
+    name: "Thick Rice Noodle Salad",
+    image: food_17,
+    price: "50 B",
+    description: "Burmese Traditional Salad",
+    category: "Burmese Salads",
+    options: ["Fried Beans", "Nga Phel"],
+  },
+  {
+    _id: "17",
+    name: "Rakhine Papaya Salad",
+    image: food_18,
+    price: "75 B",
+    description: "Burmese Traditional Salad",
+    category: "Burmese Salads",
+    options: [],
+  },
+  {
+    _id: "18",
+    name: "Rice Noodle Salad",
+    image: food_19,
+    price: "75 B",
+    description: "Burmese Traditional Salad",
+    category: "Burmese Salads",
+    options: [],
+  },
+  {
+    _id: "19",
+    name: "Rakhine Vermicelli Salad",
+    image: food_20,
+    price: "75 B",
+    description: "Burmese Traditional Salad",
+    category: "Burmese Salads",
+    options: [],
+  },
+
+  // Burmese Snacks
+  {
+    _id: "20",
+    name: "Mala Chicken Wings",
+    image: food_21,
+    price: "99 B",
+    description: null,
+    category: "Burmese Snacks",
+    options: [],
+  },
+  {
+    _id: "21",
+    name: "Prata (Peas)",
+    image: food_22,
+    price: "60 B",
+    description: null,
+    category: "Burmese Snacks",
+    options: [],
+  },
+  {
+    _id: "22",
+    name: "Fried Chicken Wings",
+    image: food_23,
+    price: "95 B",
+    description: null,
+    category: "Burmese Snacks",
+    options: [],
+  },
+  {
+    _id: "23",
+    name: "Mala Potato",
+    image: food_24,
+    price: "85 B",
+    description: null,
+    category: "Burmese Snacks",
+    options: [],
+  },
+  {
+    _id: "24",
+    name: "Mixed Fried Snacks (L)",
+    image: food_25,
+    price: "150 B",
+    description: null,
+    category: "Burmese Snacks",
+    options: [],
+  },
+  {
+    _id: "25",
+    name: "Mixed Fried Snacks (S)",
+    image: food_26,
+    price: "75 B",
+    description: null,
+    category: "Burmese Snacks",
+    options: [],
+  },
+
+  // Drinks
+  {
+    _id: "26",
     name: "Regular Tea",
     image: drink_1,
     price: "40 B",
     description: "Burmese Tea",
     category: "Drinks",
+    options: [],
   },
   {
-    _id: "17",
+    _id: "27",
     name: "Slightly Rich Tea",
     image: drink_2,
     price: "40 B",
     description: "Burmese Tea",
-    category: " Drinks",
+    category: "Drinks",
+    options: [],
   },
   {
-    _id: "18",
+    _id: "28",
     name: "Sweet & Rich Tea",
     image: drink_3,
     price: "40 B",
     description: "Burmese Tea",
     category: "Drinks",
+    options: [],
   },
   {
-    _id: "19",
+    _id: "29",
     name: "Sweet & Astringent Tea",
     image: drink_4,
     price: "50 B",
     description: "Burmese Tea",
     category: "Drinks",
+    options: [],
   },
   {
-    _id: "20",
+    _id: "30",
     name: "Astringent & Rich Tea",
     image: drink_5,
     price: "50 B",
     description: "Burmese Tea",
     category: "Drinks",
+    options: [],
   },
   {
-    _id: "21",
+    _id: "31",
     name: "Bland & Sweet Tea",
     image: drink_6,
     price: "50 B",
     description: "Burmese Tea",
     category: "Drinks",
+    options: [],
   },
   {
-    _id: "22",
+    _id: "32",
     name: "Silone Tea",
     image: drink_7,
     price: "75 B",
     description: "Burmese Tea",
     category: "Drinks",
+    options: [],
   },
   {
-    _id: "23",
+    _id: "33",
     name: "Burmese Tea Cold",
     image: drink_8,
     price: "50 B",
     description: "Burmese Tea",
     category: "Drinks",
+    options: [],
   },
+
+  // Today's Specials
   {
-    _id: "24",
+    _id: "34",
+    name: "Rakhine Noodle Soup",
+    image: food_15,
+    price: "50 B",
+    description: "Rakhine Traditional Soup",
+    category: "Today's Specials",
+    options: [],
+  },
+
+  // Combo's Sets
+  {
+    _id: "35",
     name: "Set A",
     image: set_A,
     price: "169 B",
     description: "",
     category: "Combo's Sets",
+    options: [],
   },
   {
-    _id: "25",
+    _id: "36",
     name: "Set B",
     image: set_B,
     price: "189 B",
     description: "",
     category: "Combo's Sets",
+    options: [],
   },
   {
-    _id: "26",
+    _id: "37",
     name: "Set C",
     image: set_C,
     price: "220 B",
     description: "",
     category: "Combo's Sets",
+    options: [],
   },
 ];

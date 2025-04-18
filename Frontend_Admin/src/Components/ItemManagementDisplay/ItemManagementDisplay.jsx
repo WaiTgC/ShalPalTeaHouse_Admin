@@ -9,6 +9,7 @@ const ItemManagementDisplay = () => {
   const [newItemName, setNewItemName] = useState("");
   const [newItemPrice, setNewItemPrice] = useState("");
   const [newItemCategory, setNewItemCategory] = useState("");
+  const [newItemOptions, setNewItemOptions] = useState("");
   const [newItemImage, setNewItemImage] = useState(null);
 
   const closeAlert = () => {
@@ -16,11 +17,12 @@ const ItemManagementDisplay = () => {
     setNewItemName("");
     setNewItemPrice("");
     setNewItemCategory("");
+    setNewItemOptions("");
     setNewItemImage(null);
   };
 
   const handleAddItem = () => {
-    setShowAlertBox(true); // Show custom alert box
+    setShowAlertBox(true);
   };
 
   const handleFileChange = (e) => {
@@ -33,15 +35,20 @@ const ItemManagementDisplay = () => {
 
   function handleAlertBoxSubmit() {
     if (newItemName && newItemPrice && newItemCategory) {
+      const optionsArray = newItemOptions
+        .split(",")
+        .map((opt) => opt.trim())
+        .filter((opt) => opt);
       const newItem = {
-        _id: (items.length + 1).toString(), // Ensure unique ID
-        name: newItemName,
+        _id: Date.now().toString(),
+        name: newItemName.trim(),
         image: newItemImage,
-        price: newItemPrice,
-        category: newItemCategory,
+        price: newItemPrice.trim(),
+        category: newItemCategory.trim(),
+        options: optionsArray,
       };
       addItem(newItem);
-      closeAlert(); // Close alert box and reset fields
+      closeAlert();
       alert("Item added successfully!");
     } else {
       alert("Please fill in all required fields (name, price, and category).");
@@ -52,18 +59,12 @@ const ItemManagementDisplay = () => {
     closeAlert();
   }
 
-  const handleEdit = (id) => {
-    alert(`Edit item with ID: ${id}`);
-  };
-
   const handleSave = (updatedItem) => {
-    console.log("Received updated item:", updatedItem);
     updateItem(updatedItem);
     alert("Item saved successfully!");
   };
 
   const handleDelete = (id) => {
-    console.log("Deleting item with ID:", id);
     if (window.confirm("Are you sure you want to delete this item?")) {
       deleteItem(id);
       alert("Item deleted successfully!");
@@ -80,6 +81,7 @@ const ItemManagementDisplay = () => {
               <th>Name</th>
               <th>Price</th>
               <th>Photo</th>
+              <th>Options</th>
               <th colSpan={3}>Actions</th>
             </tr>
           </thead>
@@ -90,7 +92,6 @@ const ItemManagementDisplay = () => {
                 index={index + 1}
                 item={item}
                 onDelete={handleDelete}
-                onEdit={handleEdit}
                 onSave={handleSave}
                 showAddButton={index === items.length - 1}
                 onAdd={handleAddItem}
@@ -131,6 +132,16 @@ const ItemManagementDisplay = () => {
                   value={newItemPrice}
                   onChange={(e) => setNewItemPrice(e.target.value)}
                   placeholder="Enter price (e.g., 50 B)"
+                  className="alert-box-input-item"
+                />
+              </div>
+              <div className="inputcontainer">
+                <h3>Enter Options</h3>
+                <input
+                  type="text"
+                  value={newItemOptions}
+                  onChange={(e) => setNewItemOptions(e.target.value)}
+                  placeholder="Enter options (comma-separated)"
                   className="alert-box-input-item"
                 />
               </div>

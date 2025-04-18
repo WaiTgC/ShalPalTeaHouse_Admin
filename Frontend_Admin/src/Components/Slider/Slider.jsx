@@ -38,7 +38,7 @@ const Slider = () => {
   }, [isOpen]);
 
   return (
-    <nav className="navbar navbar-light bg-white">
+    <nav className="navbar navbar-light ">
       <button
         ref={buttonRef} // Attach ref to button
         className="navbar-toggler custom-toggler "
@@ -50,13 +50,13 @@ const Slider = () => {
           <svg
             width="30"
             height="30"
-            viewBox="0 0 30 30"
+            viewBox="10 0 10 30"
             fill="#000"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M4 7H26M4 15H26M4 23H26"
-              stroke="currentColor"
+              stroke="black"
               strokeWidth="4"
               strokeLinecap="round"
             />
